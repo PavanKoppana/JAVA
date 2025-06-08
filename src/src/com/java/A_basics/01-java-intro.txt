@@ -1,0 +1,37 @@
+1) JAVA: Java is a programming language and a platform. Java is a high level, robust,
+object-oriented and secure programming language.
+
+2) Computing platform: Basically we have something called JDK which is nothing but "java development tool kit".
+it comes with JRE(Java Runtime Environment) which provides environment and libraries needed to support the JVM.
+JRE contains JVM(Java Virtual Machine) which runs the Java bytecode.
+
+
+
+Types of Java Applications:
+---------------------------
+1) Standalone applications: These are also known as Desktop applications or Windows-based applications
+    ex: Visual studio, Video games etc.
+
+2) Enterprise applications: These are basically used within internal business. For example a bank will have an internal
+    application for there individual requirements and use-cases.
+
+3) Web applications: An application that runs on server side and generates a dynamic page in web is known as
+    web application. Ex: Linkedin(Web), Flipkart(Web).
+
+4) Mobile applications: Exclusively created for mobiles, Ex: Reddit(Android), Cred(Android).
+
+
+Java Platforms/Editions:
+------------------------
+1) Java standard edition(Java SE)
+2) Java enterprise edition(Java EE)
+3) Java micro edition(Java ME)
+4) Java Fx
+
+
+
+
+
+
+
+
