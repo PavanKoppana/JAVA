@@ -1,7 +1,9 @@
 package com.java.B_datatypes;
 
+
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class NonPrimitiveDatatypes {
 
@@ -23,6 +25,9 @@ public class NonPrimitiveDatatypes {
     private void getString(){
         String s = "Algo Tales";
         System.out.println("\nString: " + s);
+        int x = 10;
+        byte y = (byte) x;
+        long z = x;
     }
 
     private void getArray() {
@@ -40,10 +45,10 @@ public class NonPrimitiveDatatypes {
 
     }
 
-        private void getByte(){
+        public void getByte(){
         Byte x = 7;
         ArrayList<Byte> Bytelist = new ArrayList<>();
-        Bytelist.add((byte) 7);
+        Bytelist.add((byte)7);
         Bytelist.add((byte) 8);
         System.out.println("\nByte ArrayList: " + Bytelist);
 
@@ -51,7 +56,7 @@ public class NonPrimitiveDatatypes {
 
     private void getShort(){
         Short x =7;
-        ArrayList<Short> Shortlist = new ArrayList<>(Arrays.asList((short)1, (short)2, (short)3));
+        List<Short> Shortlist = new ArrayList<>(Arrays.asList((short)1, (short)2, (short)3));
         Shortlist.add((short) 2);
         System.out.println("\nShort ArrayList: " + Shortlist);
 
