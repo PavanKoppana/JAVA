@@ -13,6 +13,8 @@ public class StaticVariables {
         System.out.println(second_object_of_variables.static_player_jersy_no);
         System.out.println(static_player);
         System.out.println(static_player_jersy_no);
+        static_player = "Pavan";
+        System.out.println("Static player Class 2: "+ static_player);
     }
 
 }

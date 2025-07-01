@@ -1,0 +1,12 @@
+1) break: it is a control structure/statement which will be used to terminate the
+          loop when condition is true.
+
+2) continue: it is a control structure/statement which will be used to skip a specific
+             iteration in a loop based on the condition given.
+
+3) return: it is a control structure/statement which will be used to terminate the
+           whole method when condition is true.
+
+4) labeled break/continue: when you have nested loops, you can assign an identifier
+                           to loops and break/continue them by adding break or continue
+                           followed by loop name. Refer the code more clarity.

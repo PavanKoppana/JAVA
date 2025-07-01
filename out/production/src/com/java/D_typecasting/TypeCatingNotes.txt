@@ -1,0 +1,14 @@
+1) Type Casting/Conversion is nothing but converting one data type into others.
+2) There are two types of casting/conversion.
+   2.1) Widening conversion: As the name suggests you can widen the small sized data type to large sized
+   datatype. For example, you can widen a byte datatype to short and so on. This can be done without cast in syntax.
+
+   2.2) Narrowing conversion: You narrow or cut down the larger data type into smaller one. But there will
+        be potential cause of data loss if the value exceeds the range. For example, you can narrow an int
+        datatype to byte. if the value is more than 300, there will be data loss.
+
+3) Refer to the TypeCasting png file for the list of operations that you can perform as part type casting.
+
+4) Automatic type promotion in expressions: if you are trying to perform an expression in java
+   with multiple datatypes, it will convert the final value to the largest data type in the expression.
+   So technically you have to declare a variable with the largest data type.

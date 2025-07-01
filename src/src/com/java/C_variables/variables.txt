@@ -1,0 +1,9 @@
+Variables:
+
+1) In order to access class level variables in static methods, you need to create object of
+   the class before initiating the value. In Non-static methods you can access directly.
+2) Instance variables is object specific, so everytime you create a new object, value will be
+   reset to default.
+3) Local variables is class specific, so it will refer to the last updated value which is sitting
+   in the heap memory. because memory location of the literal will be stored in metaspace/method area
+   which will stays alive as long as the class is loaded.

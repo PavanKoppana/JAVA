@@ -32,3 +32,28 @@ programming language that could run on any device -"write once, run anywhere."
 
 Note: Pavan-Justify all the above points while working with Java in real-time.
 
+
+
+1) Everything that you are writing in ".java" files should be in classes.
+
+2) Make sure that first letter of class name should be capital.(Good practice)
+
+3) cd, cd.., mkdir
+
+4) "javac ClassName.java" to compile the code which will create byte code/.class file
+   "java ClassName" to Run the byte code.
+
+5) class is an entity in java where we can define properties(fields/variables) and
+   behaviours(methods/functions).
+
+6) whenever we run the java code it will look for the main method, main method is an
+   entry point for java.
+
+7) In order to call any variable or method from one class, we need to create an object of that class.
+   but if you define that so-called method or variable as
+   static, object creation is not required.
+
+7) we can use void before method name if we don't want to return any value when method execution
+   completes.
+
+8) int a = 10;  a is identifier, 10 is literal.

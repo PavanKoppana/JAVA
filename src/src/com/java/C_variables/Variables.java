@@ -1,7 +1,7 @@
 package com.java.C_variables;
 
 
- class Variables {
+ public class Variables {
 
     // Static Non-primitive variable will contain last updated value in heap memory
     static String static_player = "Kohli";
@@ -31,7 +31,7 @@ package com.java.C_variables;
         object_of_variables.getLocalVariable();
         object_of_variables.verifyclasslevelplayers();
         StaticVariables object_of_staticvariables = new StaticVariables();
-        InstanceVariables objec_of_instanceariables = new InstanceVariables();
+        InstanceVariables object_of_instancevariables = new InstanceVariables();
 
     }
 
@@ -50,11 +50,11 @@ package com.java.C_variables;
         System.out.println("Updated Instance Player Jersy No: " + instance_player_jersy_no);
 
 
-        // Instance Non-primitive variable
+        // Local Non-primitive variable
         String local_player = "Rohit";
         System.out.println("Local Player: " + local_player);
 
-        // Instance primitive variable
+        // Local primitive variable
         int local_player_jersy_no = 45;
         System.out.println("Local Player Jersy No: " + local_player_jersy_no);
     }

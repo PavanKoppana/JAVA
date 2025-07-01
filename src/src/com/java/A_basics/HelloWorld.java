@@ -9,7 +9,7 @@ public class HelloWorld{
     public static void main(String[] x){
         //public : Access Modifier
         //static : defining the type of the method as static so it can be called without object creation
-        //void : Say that, this method is not returning anything.
+        //void : Says that, this method is not returning anything.
         /* main : when you run the java code it will look for main method, it is basically entry point of java
         program. so declaring this as main method. */
         //String[] x : Input arguments is mandatory for main method, so declared data type - Array of Strings and named the variable as x.
