@@ -1,0 +1,21 @@
+1) if condition: it will check whether the condition is true or not. if
+   true it will execute the block of code written in "if block". if false it will
+   skip that block of code.
+
+2) if-else condition: if the "if" condition returns true, it will execute "if" block.
+   if returns false it will execute else block.
+
+3) if-else-if ladder: it will check multiple if condition in sequential order.
+
+4) switch: Similar to if-else-if, but it won't check every condition instead it
+   directly jumps into the fulfilling condition and implement that code.
+   break statement is necessary to stop the flow or else it executes until it
+   finds break.
+
+ 5) enhanced switch: refined version of switch statement, it doesn't need
+    break statement.
+
+ 6) Nested if condition: "if" conditions within "if" conditions.
+
+ 7) Nested switch statements: "switch" statements within "switch" statements;
+

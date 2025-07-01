@@ -1,0 +1,17 @@
+ Loops: A loop in java is a control structure where you can execute a block a code
+          repeatedly(or in a loop) until a condition is met.
+
+2)Types of loops:
+      1) for loop: it is recommended to use this if we already knew how many times we
+                   need to run the loop. Refer the given code for syntax.
+
+      2) while loop: it is recommended to use this loop when we are not sure on number of
+         iterations that we need to execute. We need to declare the variable outside the loop.
+
+      3) do while: similar to while loop but, no matter what it will iterate the loop
+         at least once as the while condition will be written in the end.
+         We need to declare the variable outside the loop.
+
+      4) for-each loop: Advanced for loop can read all the elements in Data structures
+                        without explicit declaration like for loop, refer code in Loops class
+                        for detailed info.
