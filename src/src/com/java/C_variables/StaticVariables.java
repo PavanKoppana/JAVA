@@ -3,6 +3,7 @@ package com.java.C_variables;
 import static com.java.C_variables.Variables.static_player;
 import static com.java.C_variables.Variables.static_player_jersy_no;
 
+
 public class StaticVariables {
 
     Variables second_object_of_variables = new Variables();

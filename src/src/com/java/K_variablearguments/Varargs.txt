@@ -1,0 +1,5 @@
+Varargs: varargs also known as variable length arguments, will let you
+         pass the 0 or more input arguments with the same data type. it must
+         be the last parameter in the method signature.
+
+         ex: public void varagrsexample(int x, int...y);

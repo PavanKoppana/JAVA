@@ -1,0 +1,9 @@
+1) Immutable objects: Everytime you update the value of the immutable object
+                   it will create a new object in heap memory instead of
+                   re-writing the existing one. So the original object
+                   remains same. Example: String.
+
+2) Mutable objects: Everytime you update the value of the mutable object
+                   it will update the same object in heap memory instead of
+                   creating the new object. So the original object
+                   will be updated. Example: Array.
