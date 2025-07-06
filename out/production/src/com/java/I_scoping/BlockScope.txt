@@ -1,0 +1,3 @@
+Block Scope: In java a scope of variable is restricted to it's block, this is
+             called as block scope. and the scope starts after initialization of
+             the variable not just after declaration.

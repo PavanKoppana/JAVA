@@ -1,0 +1,4 @@
+Shadowing: overriding the value of the class level variable in the method
+           by declaring & initializing a new variable in method with the same name
+           and datatype. Then the method level variable will shadow the class
+           level variable.
