@@ -1,0 +1,6 @@
+2D Array: Basically it an array of arrays, mostly look like matrix.
+
+The value of rows is mandatory to pass in 2d array because it specifies the
+length of the 2D Array.
+
+Refer code for syntax.
