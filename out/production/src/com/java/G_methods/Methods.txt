@@ -8,3 +8,7 @@ Types: Typically there are four types of method:
 2) method with no return type and has input arguments.
 3) method with a return type and no input arguments.
 4) method with a return type and input arguments.
+
+
+Ambiguity error: if you call a method without passing expected input params,
+                 this situation will give you ambiguity error.

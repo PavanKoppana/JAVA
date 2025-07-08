@@ -7,7 +7,7 @@ public class OneDimensionalArray {
 
     public static void main(String[] args) {
         OneDimensionalArray obj = new OneDimensionalArray();
-        obj.array();
+       // obj.array();
         obj.inputarray();
 
     }

@@ -1,0 +1,17 @@
+Arraylist: it is a class in java where we can implement resizable array.
+
+    Properties:
+    1) Unlike arrays, arraylist can grow dynamically in runtime. Let's say
+       you declared an arraylist with initial capacity of 10, when you add
+       11th element, internally an object will be created for arraylist with
+       15 elements and copy the existing elements to newly created object
+       (everytime you exceed the limit, it will grow by 50% of current size).
+       the capacity is 15 but not the actual size.
+
+    2) Along with growing dynamically, it can also shrink if remove the elements
+       in the list.
+
+    3) Memory allocation is non-contiguous if consider end to end.
+       because the indices will be stored continuously but those indices
+       doesn't have the actual objects it has references where the objects are
+       scattered in heap memory.

@@ -1,0 +1,31 @@
+Array: An array is a collection of elements with same datatype.
+
+    Properties of Array:
+    1) All the elements in array should be of same data type.
+    2) Once the size is assigned for an array, it is pretty much fixed,
+       it won't grow dynamically.
+    3) The declaration will happen in compile time.
+    4) Initialization/Object creation will happen in runtime, this object
+       creation is called Dynamic memory allocation.
+    5) In other words dynamic memory allocation  is nothing but
+       "The memory will be allocated in runtime."
+
+
+    Memory Allocation of an Array:
+    1) Array objects will be stored in heap memory.
+    2) According to JLS(Java language specifications) heap objects are not
+       stored in contiguous/continuos memory.
+    3) In c/c++ it follows contiguous memory allocation.
+    4) Continuos/Contiguous memory allocation means, where each process/object
+       will be stored in a single/unbroken block of memory in the systems
+       main memory(RAM).
+    5) Since array objects in java are may or may not be contiguous. it all
+       depends on how JVM handled that object in that time.
+    6) But for primitive types it will store in contiguous format, because
+       these are value variables.
+
+
+    Insights: "new" keyword will be used to create an object.
+               null is literal in java, null is only for non-primitives,
+               it is a by default value of reference variables.
+
