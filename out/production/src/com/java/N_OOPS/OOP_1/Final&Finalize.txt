@@ -1,0 +1,27 @@
+final:
+1) You can't mutate/update the value if variable,
+    if it is final-primitive or final immutable.
+2) You can mutate the value of immutable reference objects,
+    but you cannot re-initialize/ re declare them with new keyword
+
+3) Always initialize final variable when it is declared
+
+
+
+Garbage Collector:
+1) GC will free-up the space in heap memory by removing un-referenced objects,
+   but it will not necessarily free-up every time an object get
+   un-referenced, instead it will free-up the space once some
+   metrics are reached.
+
+2) finalize(); method in java is an internal method that will be called by
+            GC to free-up the space, but you can override it in your code,
+            which means if at that point of time GC feels like it reached
+            that metric to call finalize, then the overridden method get hit,
+            and you can write a block of code to run that. it is
+            pretty much used for debugging purpose. But remember if
+            GC doesn't feel that load at that point, java won't run your
+            overridden method.
+
+      System.gc(); ->You can also mock the of gc for telling, hey gc just check whether
+            you have a lot of memory to free-up.

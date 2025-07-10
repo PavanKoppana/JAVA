@@ -1,0 +1,31 @@
+Class: class is a name group of properties and functions.
+You can instantiate class by creating an object of it.
+Object is basically an instance of class.
+
+More Generic:
+1) Class is a logical construct.
+2) Object is a physical reality.
+
+new Keyword: "new" key word is used to create objects in java.
+
+Dynamic memory allocation: Dynamically allocates memory at Runtime and
+                    returns to a refernce to the variable.
+                    Ex: "Student studen1 = new Student();"
+                    Student studen1-> happens in compile time.
+                    new Student();-> happens in run time.
+Hence, all class objects in java will be allocated dynamically.
+
+
+Default Constructor: new object of a class is considered to be a by
+          default constructor. Ex: "Student studen1 = new Student();"
+          Student() -> by default constructor.
+
+constructors won't be having return type, because the type of the
+class itself is a return type.
+
+Constructor overloading: you can overload a constructor n number of times,
+               by updating the type of input arguments of it.
+
+this keyword: In run time, "this" keyword will be replaced by the
+              name of the reference variable or Current object.
+
