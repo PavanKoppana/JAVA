@@ -7,7 +7,7 @@ package com.java.C_variables;
     static String static_player = "Kohli";
 
     // Static primitive variable
-    static int static_player_jersy_no = 18;
+    public static int static_player_jersy_no = 18;
 
     // Instance Non-primitive variable
     String instance_player = "Dhoni";
@@ -66,5 +66,10 @@ package com.java.C_variables;
         System.out.println("Instance Player: " + instance_player);
         System.out.println("Instance Player Jersy No: " + instance_player_jersy_no);
     }
+
+    public static void staticmethod(){
+        System.out.println("Importing static method");
+    }
+
 
 }

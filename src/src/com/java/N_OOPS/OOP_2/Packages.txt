@@ -1,0 +1,7 @@
+Packages:
+1) Packages are just folders used to store java class files.
+2) You cannot store class files with same name in same package.
+3) You need to specify the name of the package in your code,
+   you can do that by using "package" keyword.
+4) You can use the public static fields/methods from another package by
+    importing them.
