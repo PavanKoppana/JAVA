@@ -1,0 +1,21 @@
+-> Static variables are not associated with the objects, they are associated with Classes.
+   Always call static variables by there class name, not with object name.
+
+-> Why main method is static?
+Because main method is entry point for a java program to run. You can only create objects
+after entering into the program, So you should expect at least one method to run before
+creating object. which is nothing but a main method. since static fields/methods can
+be created without objects, main method is declared as static.
+
+-> Non-Static:
+1) if something is non-static which means it belongs to an object.
+2) You can't access a non-static members/stuff in static context without referencing or creating an instance of that class.
+3) You can access static stuff in non-static members. You can also access static methods in another static methods.
+4) You can also access non-static stuff in another non-static stuff in the same class,
+    because anyhow you will create an object of it to call either of them.
+5) You cannot use "this" keyword in static method
+
+
+-> Static Block:
+static block will run only once when the class is loaded for very first time.
+it will be called without any method call.

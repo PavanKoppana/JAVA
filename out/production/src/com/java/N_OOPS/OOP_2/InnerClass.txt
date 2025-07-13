@@ -1,0 +1,12 @@
+Nested Class: if you create a class inside a Top-Level class,
+              it can be called as Nested class.
+
+Inner Class: if you make a nested class as static then it can be called
+             as inner class.
+
+Fact: All inner classes are nested but not all the nested classes are inner.
+      only static nested classes are considered to be an inner class.
+
+1) Top level classes cannot be static.
+2) Nested classes can be static. if nested class is non-static, you have to
+   create the object of top level class of nested class and call the nested class.

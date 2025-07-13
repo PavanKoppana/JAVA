@@ -1,0 +1,8 @@
+Singleton Class:
+
+   A Singleton class in java only allow us to create one instance of it.
+   you can achieve this by defining the private constructor,private static
+   variable to store the instance and a public static method to return
+   the instance which has if condition to check the value of the
+   instance is null and return it.
+
