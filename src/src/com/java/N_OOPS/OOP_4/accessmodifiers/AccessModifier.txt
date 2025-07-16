@@ -1,0 +1,10 @@
+Access Modifier: it will define the scope(visibility) of a class,
+                 method or a variable.
+
+public: can be accessed anywhere in the project.
+private: can be accessed only within the class.
+default: can be accessed anywhere within the package.
+protected: can be accessed anywhere within the package, also
+           can be accessed in the subclass of another package
+           which is extended from super class of its source package.
+           cannot be accessed in another class from another package.

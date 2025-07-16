@@ -1,0 +1,14 @@
+Polymorphism: it means "Many forms". it allows the same action(like same method)
+to behave differently based on the object that performs it.
+
+Types:
+1) Compile time polymorphism: it will be resolved in compile time.
+   example: constructor/method overloading which happens in compile time
+   this mechanism is also known as Static Binding/Early Binding.
+
+2) Runtime polymorphism: it will be resolved in runtime.
+   example: method overriding which happens in runtime. This mechanism is
+   also known as Dynamic binding/ Late Binding.
+
+Dynamic method Dispatch: when you have overridden methods in inherited class
+DMD will resolve the confusion and call the desired method in runt-time.

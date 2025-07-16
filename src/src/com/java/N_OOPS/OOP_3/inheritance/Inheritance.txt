@@ -1,0 +1,49 @@
+Inheritance: it allows one class to acquire the properties and behaviours
+(methods and fields) of another class.
+From: Super Class, Base Class or Parent Class
+To: Sub Class, Derived Class or Child Class
+
+
+Properties:
+1) You can access the methods and fields from Super Class.
+
+2) You can create a child class by using "extends" keyword. child class will have properties
+of base class, and it can have some properties of its own.
+
+3) child can access members of parent, but Parent class, or it's object cannot access them.
+
+4) Although the subclass includes the members of it's super class, it will not allow to
+   inherit private members. But you can initialize them in Child class
+   using super keyword, technically super keyword will call the constructor of Parent class.
+
+5) Let's say you are calling a constructor in child class, by default it
+   will call constructor with no args in Parent class by declaring
+   super(); implicitly. super keyword is used to call constructor of Super Class.
+
+6) You can call the specific constructor of Super Class by using super keyword
+  with desire args.
+
+7) super key word can be only used in constructors, you cannot declare args in
+super call, but you can use the values of input args of constructor.
+
+8) if you call any constructor in child class, and don't specify the super(args)
+it will implicitly call default constructor(constructor with no args) of Parent
+if constructor with no args is not available in Parent and you don't specify
+which constructor to call, it will give you compile time error.
+
+Let's say you have class A,B,C.
+if you use super keyword in C, it will call the constructor of B(And B will call constructor of
+A accordingly) which is parent class of C.
+
+
+Properties of super():
+
+1) if you use super in class A, it will refer the Object class defined by Java open source team.
+2) you can also use super as "this" keyword if you want to explicitly access parent Class members
+3) you can use the super keyword only in starting of the block, not after initializing child members.
+4) you need to take the input params in child class constructor only and pass the values in super method.
+5) if you take the parent members as input params in child constructor and doesn't specify any
+   super constructor, it will directly call the default constructor of the parent class.
+
+Data hiding: make stuff private
+

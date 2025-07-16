@@ -1,0 +1,35 @@
+Types:
+1) Single inheritance
+2) Multi level inheritance
+3) Multiple inheritance
+4) Hybrid inheritance
+5) Hierarchical inheritance
+Note: You can prevent the inheritance by making the class final,
+      if you make class final, implicitly it will make all the methods in
+      it also final.
+
+1) Single inheritance: inherits from one super class only.
+   ex: Class B extends A{}
+
+2) Multi level inheritance: inherits from class which itself derived from
+                            another class.
+                            ex: Class C extends B{} - B is already extended from A
+
+3) Multiple inheritance: when a class inherits from more than one class
+                         directly.
+                         ex: Class F extends D, E{} - This is not supported in java by using classes.
+
+4) Hierarchical inheritance: different classes inherits same Super class.
+                             ex: Class B extends A{}
+                                 Class C extends A{}
+                                 Class D extends A{}
+5) Hybrid inheritance: combination of multiple inheritance.
+Scenario:
+Let's say we have class C which is extended from B and B is Extended From A.
+Also we have class called D
+
+Hybrid ex: Class E extends D,C{} - Not Supported in java through classes
+here E is combination of multilevel and Single inheritance.
+
+
+
