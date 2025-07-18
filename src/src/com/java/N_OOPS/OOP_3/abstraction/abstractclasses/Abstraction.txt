@@ -1,0 +1,29 @@
+Abstraction: the process of hiding implementation details and exposing
+             only the functionality to the user. Abstraction can be achieved
+             by using abstract classes or interfaces in java.
+
+
+abstract class: Any class that contains one or more abstract methods, that must
+                be declared as abstract class.
+
+properties of abstract class:
+1) you cannot create an object of abstract class.
+2) You can have abstract non-static methods. but you cannot have abstract
+   constructors, abstract static methods. every abstract method must be
+   overridden in its child class.
+3) you can have normal non-static methods, normal static methods,
+   normal constructors, instance variables and static variables in abstract class.
+4) All the static stuff can be accessed by class name and all the non-static stuff
+   can be accessed in its child class or in object of child class.
+5) Constructors in abstract class can be accessed in its child class.
+6) Although you cannot have direct object of abstract class, you can have the
+   object of its child class with abstract class as reference type.
+7) You cannot make abstract class as final class because it is meant
+    to be overridden.
+
+
+important point: you can use "super" and "this" in the same block of child class
+                 the last instruction is most reactive. and also if you have variables with same name
+                 on both parent and child, "this" keyword will prioritize child variable and super will
+                 always refer to Parent. it's recommended to use super if your intention is to
+                 refer stuff in Parent class.
