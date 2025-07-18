@@ -1,0 +1,6 @@
+Encapsulation: it is the process of hiding the internal details of
+               an object and restricting direct access to its data.
+               Instead, data is accessed and modified through
+               public methods, getters and setters.
+
+Example: String Class, ArrayList, private instance variable in custom class.

@@ -36,7 +36,7 @@ public class ChildClass1 extends ParentClass { // Single inheritance
          this.strikerate = childtype.strikerate;
     }
 
-    public void information(){
+    public void informationnn(){
         System.out.println("This is in Child Class");
     }
 

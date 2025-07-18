@@ -1,0 +1,8 @@
+Diamond problem: if you have two child interfaces of Parent interface
+which shares the same default method, and you create a class by
+implementing two child interfaces, the compiler doesn't know which
+method to implement, this situation is called Diamond problem.
+
+Resolution: you can resolve this by overriding the same method in
+your class, you can also choose which interface method to override.
+Check the code for more details.

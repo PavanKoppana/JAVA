@@ -1,0 +1,13 @@
+Interface: interface is similar to abstract class, but it only contains abstract methods and
+           default methods.
+
+Properties:
+1) interfaces will have only abstract methods, all the methods are
+   public & abstract by default.
+2) Variables are static and final by default in interface.
+3) You cannot create constructors in interfaces. and you cannot create objects of interfaces.
+4) you can implement multiple interfaces in a same class.
+5) you can also extend an interface to an interface.
+6) you can have nested interfaces in classes.
+7) you can have default methods and static methods in interface, But body
+   is mandatory.
