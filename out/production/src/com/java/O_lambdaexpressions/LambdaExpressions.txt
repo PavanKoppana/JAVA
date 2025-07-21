@@ -1,0 +1,19 @@
+Lambda Expressions: it is used to write short block of code which will take
+                    input parameters and returns a value(Based on Functional interface
+                    that we are using) they are mainly used to implement functional interfaces.
+                    it is more or less can be considered as nested method. because
+                    in java we don't have nested method so if you want to perform
+                    a method inside a method, lambda expressions are good choice.
+
+Lambda expression can be created by using Arrow operator "->"
+
+Common Use Cases:
+
+1) Simplifying anonymous classes.
+2) Functional interfaces.
+3) Collection and Stream API's.
+4) Event Handling.
+5) Concurrency and threading.
+6) Method references.
+
+

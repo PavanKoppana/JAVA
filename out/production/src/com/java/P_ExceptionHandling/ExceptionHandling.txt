@@ -1,0 +1,50 @@
+Error: Any Error is a serious problem that occurs outside the control
+       of the program and usually cannot be recovered from.
+
+Example:
+1) Out of memory
+2) Stack Overflow
+3) JVM Crash
+4) Hardware or OS failure
+
+Exception: An exception is an event that occurs during the program
+           execution that disrupts the normal flow of instructions.
+           this can be recovered by exception handling.
+
+types of exception handling:
+
+1) Checked: exceptions that will occur in compile-time.
+   this can be handled by using "throws" keyword and specifying the
+   expected exception beside the method signature. this action will
+   let code compile successfully and fails in runtime. if you want to
+   let the program continue you can catch the exception and do not
+   use "throw" because thrown will exit the program.
+
+2) Unchecked: exceptions that will occur in Run-time, here the code will
+              compile anyhow, but it will fail in run time. So, using
+              "throws" doesn't make any sense. in order to keep the
+              program alive you can catch the exception and do not throw
+              any exception.
+
+Note: if your intent is to stop the program when a specific exception occurs
+      just catch it and throw it.
+
+Keywords related to exception handling:
+
+1) try: you can use this try block to write a block of code which may
+     have any exception. you should have try block followed by catch block or
+     finally block. you cannot use try individually because that doesn't
+     make any sense.
+
+2) catch: used along with try to catch the corresponding exception. you cannot use
+          catch without try. you can use multiple catch blocks. but the hierarchy
+          should be child followed by parent.
+
+3) finally: this block of code will run even though an exception occurs. you can only
+            have one finally block
+
+4) throws: it can be used to handle checked exceptions to handle the
+           compiler
+
+5) throw: it is used to throw exceptions based on your
+          business logic.
