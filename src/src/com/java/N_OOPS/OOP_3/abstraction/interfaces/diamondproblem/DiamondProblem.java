@@ -4,6 +4,7 @@ public class DiamondProblem implements child1,child2 {
 
     public static void main(String[] args) {
         DiamondProblem obj = new DiamondProblem();
+        //Parent obj2 = new DiamondProblem();
         obj.greet();
     }
 

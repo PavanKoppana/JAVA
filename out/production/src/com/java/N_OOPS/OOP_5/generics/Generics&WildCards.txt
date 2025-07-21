@@ -1,0 +1,27 @@
+Generics: it is a feature in java which allows us to perform type
+          checking and type safety. Also, we can re-use the same class
+          with different datatypes, and we can do that by specifying
+          generic type in angle brackets "<>" .
+
+          Example: ArrayList<Integer>
+
+
+WildCards: In Java generics; wildcards are represented by "?" symbol.
+           they allow methods or classes to operate on wide range of
+           types without specifying the exact type.
+
+Types of wild cards:
+
+1) unbounded wild cards: allows to read all types of data irrespective of their generic datatype.
+   you can only read the elements, writing is not allowed.
+   Example: ArrayList<?>
+
+2)lower bounded wild cards: allows to read corresponding datatypes of child
+  classes of given class. only read operations.
+  Example: ArrayList<? extends Number>
+
+3)upper bounded wild cards: allows you to write/read corresponding datatypes of child
+   classes of given class. Both write and read operations are allowed.
+   Example: ArrayList<? Super Number>
+
+ Refer WildCards code for insights.

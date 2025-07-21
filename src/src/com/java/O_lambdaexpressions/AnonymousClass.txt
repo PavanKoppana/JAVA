@@ -1,0 +1,6 @@
+Anonymous Class: it is a "local inner class" in java which doesn't have a name.
+
+local inner class: a class which is sitting inside the method. and the scope of it is limited to its
+                   method. and it cannot be static
+
+

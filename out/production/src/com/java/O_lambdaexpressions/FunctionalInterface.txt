@@ -1,0 +1,11 @@
+FunctionalInterface: it is an interface in java which will only have
+                     one abstract method. You can verify it bys using
+                     @FunctionalInterface annotation. it can also have
+                     static and default methods.
+
+
+Use Cases:
+1) Lambda expressions
+2) Collections and Stream API's
+3) Multi Threading
+4) Event Handling

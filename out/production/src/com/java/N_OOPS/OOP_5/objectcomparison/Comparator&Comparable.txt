@@ -1,0 +1,14 @@
+Comparable: it is an interface used to define the natural ordering of an object of class.
+            it should be implemented in user defined Object Class. it will perform "compareTo" method
+            to sort, you can override the logic in user defined Object Class.
+            Use Case: : Let's say you have student class which needs to be sorted by their corresponding
+                        Roll No.
+            Example: Refer Code for more Insights.
+
+
+Comparator: it is also an interface used to define custom or multiple sorting strategies. it should
+            be implemented outside the Object Class. it will perform "compare" method to sort. when you
+            have multiple fields to sort like marks, age, Name. you can create custom comparators for
+            multiple sorting strategies and override the compare method logic accordingly.
+
+            Example: Refer the code.

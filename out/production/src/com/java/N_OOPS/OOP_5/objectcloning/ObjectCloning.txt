@@ -1,0 +1,29 @@
+Object cloning: it is a process of cloning/copying the properties/values from
+                one object to another. to achieve this, you need to
+                implement clonable interface in your object class just to
+                tell compiler, "Hey the object of this class can be cloned".
+                in order to clone you have to override "clone()" method
+                from Object Class and call it in your business class.
+
+Properties of clone:
+1) it will create new value for primitive types and refer to the
+   memory location of non-primitives.
+
+2) So, technically the non-primitive type variables of object1 and
+   object 2 will be referring to same object in heap.
+
+3) if you clone obj1 values to obj2, and update the property in
+   obj1, if that data-type is immutable then the updated value
+   won't be reflected in obj2. But if you update the value of
+   mutable object, the same will be reflected in obj2. this is because
+   of shallow copying. to address this you need to do deep copying.
+
+
+Shallow Copy: Imagine you cloned obj1 to obj2. it will change the
+              value of obj2(Mutable objects) even though you just
+              update obj1.
+
+Deep Copy: it will create new object for mutable types so both the
+           variables will refer to different objects in heap.
+           You can achieve this by explicitly creating new object
+           for mutable types in clone() method.
