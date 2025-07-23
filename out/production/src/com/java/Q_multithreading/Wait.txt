@@ -1,0 +1,15 @@
+Wait Scenarios and Challenges:
+
+Wait: it is state where we re explicitly making a thread to wait
+      to get a signal from another thread to continue.
+
+      Wait should be called in synchronized block and inside try block.
+      notify() or notifyAll() should be called in synchronized block only.
+
+Use Cases:
+* Waiting for a buffer to be filled(producer-consumer).
+* Waiting for a condition to be met (task completion).
+
+Challenges:
+-> Risk of waking up wrong thread or missing wakeup.
+-> Risk of spurious wakeup(waking up some waiting thread randomly).

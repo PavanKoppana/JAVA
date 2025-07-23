@@ -1,0 +1,21 @@
+Sleep Scenarios and Challenges:
+
+Sleep(): the thread is in sleep state on timeout where it won't listen to
+         another threads. it will only release lock by itself.
+
+         sleep usually won't release the lock of that thread to it's
+         synchronized block.
+
+Use Cases:
+Rate Limiting: limit the no of tasks/threads for a certain method.
+               you can use timeout before interrupting the thread.
+
+
+Challenges:
+-> Not Responsive to external signals during sleep.
+-> Sleeping too long/too short will cause performance
+   degradation or race conditions:
+-> may hold locks() if sleep is called in synchronized blocks.
+
+
+

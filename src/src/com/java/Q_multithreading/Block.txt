@@ -1,0 +1,18 @@
+Blocking and it's Challenges:
+
+Blocking: the process of blocking another thread when one thread is
+          executing in synchronized block. here thread 1 will acquire the lock
+          of synchronized block. as long as it is actively executing in
+          synchronized block it is the king of that block. once it is exited that
+          block, or it went to wait state, it will release the lock.
+          but sleep will not release the lock.
+
+Use Cases:
+to synchronize shared resources to it's corresponding threads.
+
+Challenges:
+-> Starvation: One thread doesn't get a chance due to other's hogging locks.
+-> Priority Inversion: Low priority thread holds the lock needed by
+   high priority threads.
+-> LiveLock: threads keeps changing state to avoid deadlock but make no progress.
+-> Deadlock: two or more threads wait on each other to release locks.
