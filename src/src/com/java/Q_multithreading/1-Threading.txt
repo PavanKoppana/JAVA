@@ -1,0 +1,37 @@
+Program -> A set of instructions which can be accumulated as a microservice. ex: SpringBoot
+           Application.
+
+Process -> An instance of a program. Example your SpringBoot application
+           running on EC2/Tomcat.
+
+Thread -> A thread is the smallest unit of execution inside a process.
+
+Task -> it is a unit of work that a thread can execute.
+        Example: An HTTP request for your endpoint.
+
+Types of Threads:
+1) Main Thread: thread created by JVM when your application/program is
+                started.
+
+2) User Thread: thread created by application for specific tasks.
+                for example your SpringBoot app has multiple endpoints
+                the main thread is like highway for all those cities.
+                and the user thread will be created when you receive a
+                user request to run one endpoint. it is like intersection
+                of highway to city specific road.
+
+3) Daemon thread: Background service threads that do not prevent JVM exit.
+                  example: A thread that handles garbage collector.
+
+4) Child Threads: User threads, Daemon threads, a thread created from
+                  user thread when @Async is used.
+
+5) Thread pool threads: These threads are managed by a thread pool,
+                        which is a collection of reusable threads.
+
+How Multithreading Works?
+When you receive like 20 requests at the same time to your endpoint, AWS load balancer
+will check the load and restrictions, and let the requests flow, later
+tomcat server will receive all the requests and assign each request an individual thread
+in tomcat server's thread pool. if CPU is free JVM will assign the threads
+to CPU cores and execute them simultaneously.

@@ -1,0 +1,16 @@
+Lifecycle of a thread:
+
+1) New: new thread created in thread pool.
+2) Runnable: thread is ready to run, waiting for cpu time.
+3) Running: thread is executing code. only one thread can run per core, others are
+            waiting in runnable.
+4) Blocked: in locked state, waiting to acquire a monitor lock
+            example: synchronization lock
+
+5) Waiting: waiting indefinitely for another thread to signal.
+            check "Wait.java" code for more details.
+
+6) Timed waiting(sleep): paused for fixed amount of time.
+
+7) Terminated(Dead): thread finishes it's execution, or it is
+                     stopped abnormally.

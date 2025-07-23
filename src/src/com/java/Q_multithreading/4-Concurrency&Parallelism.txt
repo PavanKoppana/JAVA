@@ -1,0 +1,19 @@
+Parallelism: the process of performing multiple tasks at the same time
+             using multiple cores of the CPU.
+
+Concurrency: the process of running multiple threads at the same time
+             on the single core using time slicing. This can be also called as context switching.
+              Refer the context below.
+
+
+Multithreading with concurrecy:
+Imagine you got 8 requests to handle, and you have only 4 cores in cpu.
+Technically each request will be assigned to individual thread. So
+we have 8 threads now but only 4 cores. Here the concurrency will come
+into the picture, where it will process 2 threads in one core by giving the
+illusion of running two threads at a time on a single core. but what's
+happening is. it is taking one thread, processing the task like 20%,
+and it will save that thread state and send it back to runnable state
+and pull new thread and process 20% and push it back and pull the old
+thread(20% old), process continues. this is called concurrency in multithreading.
+
