@@ -1,6 +1,6 @@
 package com.java.N_OOPS.OOP_5.objectcomparison;
 
-public class Player implements Comparable<Player> {
+public class Player implements Comparable<Player>  {
 
     String playername;
     int totalruns;

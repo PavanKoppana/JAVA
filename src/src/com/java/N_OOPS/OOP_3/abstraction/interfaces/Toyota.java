@@ -1,7 +1,5 @@
 package com.java.N_OOPS.OOP_3.abstraction.interfaces;
 
-import com.java.N_OOPS.OOP_3.abstraction.interfaces.engines.HybridEngine;
-
 public class Toyota {
 
     private Engine enginetype;

@@ -1,7 +1,5 @@
 package com.java.F_conditionals;
 
-import java.sql.SQLOutput;
-
 public class ControlStatements {
 
     public static void main(String[] args) {

@@ -1,7 +1,10 @@
 Wait Scenarios and Challenges:
 
-Wait: it is state where we re explicitly making a thread to wait
+Wait: it is state where we are explicitly making a thread to wait
       to get a signal from another thread to continue.
+
+      wait will release the lock acquired by one thread, even though
+      it is in synchronized block.
 
       Wait should be called in synchronized block and inside try block.
       notify() or notifyAll() should be called in synchronized block only.
