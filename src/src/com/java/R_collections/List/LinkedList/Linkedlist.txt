@@ -1,0 +1,22 @@
+LinkedList: it is a linear data structure where elements(called nodes) are not stored in contiguous
+            memory.
+
+
+Types of LinkedList: (The default LinkedList provided by java is Doubly. if you want to implement
+                      singly or circular, you have to do it manually)
+
+1) Singly LinkedList: Each node stores data and reference to next node. first node can be called as
+                      head and last node can be called as tail. if there is only one node it can be
+                      considered as both. you can only traverse in one direction(head -> tail).
+                      Fact: the reference value in tail will be null as it is the last node.
+
+2) Doubly LinkedList: Each node stores data, reference to next node and reference to previous node. the
+                      previous node address of head is null and the next node reference of tail is null.
+                      you can traverse in both directions(head <-> tail).
+
+3) Circular LinkedList: it could be either singly or doubly but the basic nature is, the next node of tail
+                        will be head, so there is no concept of null address here. if it is a
+                        singly circular LinkedList every node will have only reference of next node and
+                        the reference value in tail is head. In doubly circular LinkedList every node
+                        will have reference of it's next node and previous node. so the previous node of
+                        head is tail and next node of tail is head.

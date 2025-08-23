@@ -1,7 +1,5 @@
 package com.java.N_OOPS.OOP_2;
 
-import java.sql.SQLOutput;
-
 public class StaticObject {
     public static void main(String[] args) {
 //        StaticClass player1 = new StaticClass("Dhoni",41);

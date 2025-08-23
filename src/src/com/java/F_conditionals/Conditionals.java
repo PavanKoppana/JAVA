@@ -1,6 +1,5 @@
 package com.java.F_conditionals;
 
-import java.sql.SQLOutput;
 import java.util.Scanner;
 
 public class Conditionals {
