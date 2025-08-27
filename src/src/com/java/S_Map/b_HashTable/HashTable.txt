@@ -1,0 +1,11 @@
+HashTable: it is synchronized version of hashmap(every method is
+           synchronized). it is thread safe as it is synchronized.
+           but the problem is because of its method level synchronization
+           it is slower than HashMap in single-threaded code. In modern java
+           it is replaced by ConcurrentHashMap. check "ConcurrentHashMap.txt"
+           for more details.
+
+           * null keys are not allowed.
+           * null values are not allowed.
+
+

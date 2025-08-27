@@ -14,7 +14,7 @@ Types of LinkedList: (The default LinkedList provided by java is Doubly. if you 
                       previous node address of head is null and the next node reference of tail is null.
                       you can traverse in both directions(head <-> tail).
 
-3) Circular LinkedList: it could be either singly or doubly but the basic nature is, the next node tail
+3) Circular LinkedList: it could be either singly or doubly but the basic nature is, the next node of tail
                         will be head, so there is no concept of null address here. if it is a
                         singly circular LinkedList every node will have only reference of next node and
                         the reference value in tail is head. In doubly circular LinkedList every node

@@ -1,0 +1,56 @@
+
+collision: when internally hashing is applied there is possibility that two keys can get the same value
+            after hashing, so both the keys will collide. we can address this issues uses two mechanisms.
+            one is chaining and the other one is open addressing.
+
+chaining: when two keys have the same value after hashing, it will create a linked list in that
+          specific bucket/index and store the values. when we try to access that bucket using its key,
+          it will reach that bucket and traverse the linkedlist by using equals method. refer code or
+          diagram for more details.
+
+Fun fact: let's say we have a hashmap with the capacity of 10, and we inserted 11 elements using channing.
+          now the size of the hashmap/hashtable is 11 but the capacity remains as same as 10.
+
+Q) what if the same bucket keeps on growing as a long linkedlist?
+A) after crossing certain threshold, it will start inserting keys in Red Black Tree for optimal search
+or traversing. because if the linkedlist is too big it will consume a lot of time for traverse.
+
+here comes the types of hashing in Hashmap.
+
+1) Simple uniform hashing: Assumes every key is equally likely to be placed in any bucket.
+                           Example: 10 buckets -> 20 keys, on an average 2 keys per bucket.
+                           this is an assumption, not something real-word hash functions can guarantee.
+
+2) Universal Hashing: A family of hash functions is designed so that for any two distinct keys,
+                      the probability of collision is low.
+
+Open Addressing: only one element per one slot/bucket. hash function is going to probe.
+                 "probe" basically mean trying every index. probing is the process of searching for
+                 next available slot in the array when collision happens.
+
+probing strategies:
+
+1) Linear probing: It will check every slot one by one. if index 1 is occupied it will go to index 2,
+                   until an empty slot is found. it is simple but can cause primary
+                   clustering(long runs of occupied slots.)
+
+
+2) Quadratic probing: Instead of looking every slot like linear probing, it will move in increasing
+                      squares for example if you are trying to insert value in index 3 in the table
+                      size of 10 it will follow the below searching strategies.
+
+i=0 -> (3 + 0^2) % 10 = 3
+i=0 -> (3 + 1^2) % 10 = 4
+i=0 -> (3 + 2^2) % 10 = 7
+i=0 -> (3 + 3^2) % 10 = 2
+i=0 -> (3 + 4^2) % 10 = 9
+In the above search if it finds any empty slot, it will insert the value there.
+
+
+
+3) Double hashing: Instead of having a fixed step size like linear or quadratic probing,
+                   it will calculate the step size based on second hash function.
+
+
+4) Random probing: Instead of having a predictable probe sequence (like linear, quadratic,
+                   double hashing), random probing will choose the next slot randomly.

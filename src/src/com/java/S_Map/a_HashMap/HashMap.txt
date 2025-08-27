@@ -1,0 +1,23 @@
+Hashmap: It is data structure which will store the array of elements in
+         key value pairs. you can access any random element by passing
+         its key in constant time O(1).
+
+         * only one null key is allowed, multiple null values are allowed
+         * duplicate keys will replace the original keys.
+         * Not Synchronized
+         * it will not store elements in order.
+
+Hashcode: A random but consistent numeric code for every object. the hashcode for objects like
+          String will be in numeric. for example the hashcode of Dhoni is 66007878, and it is always
+          going to be same. but the hashcode of Integer object is going to be its value as the value
+          itself is unique numeric code. hashcode of 100 is going to be 100.
+
+hashtable: It is kind of an array of elements which will store key value pairs internally when we
+          implement HashMap. evey element can be called as index or bucket.
+
+hashing: Usually the hashtable will be created with the size of the value of the specific key that you
+         are going to insert, but it is not ideal because if you want to insert dhoni as a key it
+         should create a hashtable with the size of 66007878+1 which itself is not ideal. so internally
+         HashMap implements hashing which will reduce the size of the original hashcode based on some
+         formula. So the size of the hashtable could be optimal.
+
