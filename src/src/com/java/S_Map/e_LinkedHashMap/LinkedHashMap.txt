@@ -1,0 +1,10 @@
+LinkedHashMap: internally it will implement hashmap only, but it will
+                preserve original insertion order. for every element/entry
+                including key, value it also stores the reference of next
+                bucket and previous bucket. in this sense it is implementing
+                doubly linkedlist like structure and making sure all the
+                elements/buckets are linked/chained together. hence the
+                order is also predictable.
+
+            * 1 Null key is allowed.
+            * Multiple Null values are allowed.

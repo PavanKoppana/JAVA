@@ -1,0 +1,6 @@
+TreeMap: it is backed by red black tree and will store key value pairs.
+         but it will store keys in sorted order(natural order or
+         based on provided Comparator.)
+
+        * Null keys are not allowed.
+        * Null values are allowed.

@@ -1,0 +1,9 @@
+ConcurrentHashMap: it is a bit similar to HashTable, but HashTable perform synchronization in method
+                   level. ConcurrentHashMap will perform synchronization at bucket level. it will
+                   not lock entire table instead it will lock bucket which is getting operated or
+                   accessed.
+
+                   * null keys are not allowed.
+                   * null values are not allowed.
+                   * Thread safe.
+                   * faster in multithreaded environment when compared to HashTable.
