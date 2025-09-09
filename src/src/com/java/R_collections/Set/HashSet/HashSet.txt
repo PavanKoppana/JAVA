@@ -1,0 +1,7 @@
+HashSet: it is a data structure that stores unique elements, backed by hashmap.
+         it is same as hashmap, but it will only store key, for value it will
+         store some dummy constant.
+
+         * Duplicates are not allowed.
+         * Unordered.
+         * one Null key/element is allowed.

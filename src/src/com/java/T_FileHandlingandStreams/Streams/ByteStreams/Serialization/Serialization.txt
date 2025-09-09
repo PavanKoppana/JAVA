@@ -1,0 +1,15 @@
+
+Serialization: it is a process of converting a java object into byte stream to share across the
+               network as a files. basically it will allow us to write byte data using ObjectOutputStream.
+
+DeSerialization: it is process of converting byte stream into object. it allows us to read byte data
+                 as an object using ObjectInputStream.
+
+Serializable: it is a marker interface in java.io(it has no methods). if a class implements
+              Serializable, it tells the JVM that object of this class can be serialized.
+              if you don't implement it and try to serialize the object it will throw
+              NotSerializableException. So, basically "Serializable" just gives permission
+              for serialization.
+
+
+transient keyword: used to exclude certain fields during Serialization. refer code for more details.

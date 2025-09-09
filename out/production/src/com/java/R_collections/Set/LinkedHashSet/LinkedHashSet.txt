@@ -1,0 +1,8 @@
+LinkedHashSet: it is data structure which will store unique elements and
+               preserves original order. it is backed by LinkedHashMap. internally
+               every element will have the reference of next element and previous
+               element. so internally it implements doubly linked list.
+
+               * Duplicates are not allowed.
+               * preserves insertion order.
+               * one Null key/element is allowed.

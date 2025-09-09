@@ -1,0 +1,6 @@
+TreeSet: it is a data structure which will store unique elements. backed by
+         treemap. it will store the elements in natural order.
+
+         * Duplicates are not allowed.
+         * Ordered.
+         * Null key/element is not allowed.
