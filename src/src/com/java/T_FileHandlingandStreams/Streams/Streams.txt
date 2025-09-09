@@ -1,0 +1,14 @@
+Stream: it is basically a sequence of data. And this data can be of two types,
+        it can be byte value or character value(unicode character value).
+  * Basically it is an abstraction provided by java to work on files. Java implements streams
+    by java.io package.
+  * In order to work on byte data, we need to work with Byte Stream(InputStream, OutputStream).
+  * In order to work on character data, we need to work with Character Stream(Reader, Writer).
+
+  IO Exception: it can occur when file is corrupted, file not found etc.
+
+  Predefined streams by java:
+
+  System.out -> standard output stream -> console....print stream type
+  System.in -> standard input stream -> keyboard....input stream type
+  System.err -> standard error stream -> console....print stream type

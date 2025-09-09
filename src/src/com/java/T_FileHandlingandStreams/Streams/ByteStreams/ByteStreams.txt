@@ -1,0 +1,30 @@
+ByteStream: work with raw binary data for example: images, audios, PDF's,
+            sockets, etc.
+
+Input:
+1) FileInputStream -> read bytes from files
+2) BufferedInputStream -> Buffered reading for efficiency, in normal input stream it will go and
+                          hit the disk everytime, In BufferedInputStream, it will create a buffer
+                          and hit the disk at a time for that entire buffer.
+3) DataInputStream -> we can read Java primitive Data Types.
+4) ObjectInputStream -> reads java objects from a stream(DeSerialization).
+5) ByteArrayInputStreams -> reads bytes from in-memory byte arrays(not disk).
+
+Common Methods of Input:
+ * read() -> to read data
+ * close -> to release the resource.
+
+Output:
+1) FileOutputStream -> write bytes to files
+2) BufferedOutputStream -> Buffered writing for efficiency, in normal output stream it will go and
+                          hit the disk everytime, In BufferedOutputStream, it will create a buffer
+                          and hit the disk at a time for that entire buffer.
+3) DataOutputStream -> we can write Java primitive Data Types.
+4) ObjectOutputStream -> writes java objects to a stream(Serialization)
+5) ByteArrayOutputStreams -> writes bytes from in-memory byte arrays(not disk).
+
+Common Methods of Output:
+ * write() -> to write data
+ * flush() -> to flush the Buffer. meaning - if your BufferedOutputStream created a buffer, and you want
+              to write the file before buffer completes, you can use flush.
+ * close -> to release the resource.

@@ -1,0 +1,23 @@
+CharStream: work with char data for example JSON, XML, CSV.
+
+Reader:
+1) FileReader: read characters from files.
+2) BufferedReader: adds buffering for efficiency (similar to byte streams).
+3) InputStreamReader: Bridges between byte streams and char streams. Needed
+                      when you want to read bytes but interpret them as text.
+Common Methods of Reader:
+ * read() -> to read data
+ * close -> to release the resource.
+
+
+Writer:
+1) FileWriter: writes characters to files.
+2) BufferedWriter: adds buffering for efficiency (similar to byte streams).
+3) OutputStreamWriter: Bridges between byte streams and char streams. Needed
+                       when you want to write bytes but interpret them as text.
+
+Common Methods of Writer:
+ * write() -> to write data
+ * flush() -> to flush the Buffer. meaning - if your BufferedOutputStream created a buffer, and you want
+              to write the file before buffer completes, you can use flush.
+ * close -> to release the resource.

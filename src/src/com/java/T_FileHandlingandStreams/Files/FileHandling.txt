@@ -1,0 +1,15 @@
+File Class: it is used to create the file objects or represent path names for files and directories.
+            it doesn't handle contents - just properties and operations on files.
+
+Common methods:
+ * new File -> creates a new representation of File.
+ * createNewFile -> creates a new actual file.
+ * delete -> delete file/directory.
+ * exists -> check if file/directory exists.
+ * isFile/isDirectory -> type check.
+ * getName -> name of file/directory.
+ * getPath -> given path.
+ * getAbsolutePath -> full absolute path.
+ * length -> size in  bytes.
+ * list -> returns array of file/directory names.
+ * listFiles -> return arrays of file objects.
