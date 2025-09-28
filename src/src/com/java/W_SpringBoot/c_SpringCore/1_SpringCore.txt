@@ -1,0 +1,5 @@
+SpringCore: it is foundation for entire Spring Framework. it features (Inversion of Control) container
+            and Dependency Injection(DI) mechanism.
+
+* The core job of Spring Core is to manage objects(beans) - their creation, wiring, lifecycle and
+  configuration.

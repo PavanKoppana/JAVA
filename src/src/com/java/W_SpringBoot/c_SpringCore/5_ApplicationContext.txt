@@ -1,0 +1,6 @@
+Application Context: it is basically an interface of IoC container that manages bean life cycle
+                     like instantiation. dependency injection, initialization and destruction.
+                     it also features event handling and resource handling in spring boot.
+     * it basically follows eager loading mechanism of beans, which means it will create beans at
+       application startup itself. BeanFactory will do the opposite thing.
+

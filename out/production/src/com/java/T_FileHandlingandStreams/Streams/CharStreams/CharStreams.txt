@@ -11,7 +11,7 @@ Common Methods of Reader:
 
 
 Writer:
-1) FileWriter: writes characters from files.
+1) FileWriter: writes characters to files.
 2) BufferedWriter: adds buffering for efficiency (similar to byte streams).
 3) OutputStreamWriter: Bridges between byte streams and char streams. Needed
                        when you want to write bytes but interpret them as text.

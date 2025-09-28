@@ -1,0 +1,44 @@
+Stream API: it is a feature in java used to process a collection of data
+
+Scenario -> for example you have an arraylist that need to be sorted and filtered.
+            Instead of mutating the state of original object you can create a
+            stream of it and run a condition.
+
+Properties:
+
+ * it is not a data structure.
+ * functional in nature -> operations like map, filter, reduce use lambda expressions.
+ * Lazy evaluation -> Intermediate operations(like map, filter) are not executed until a terminal
+                      operation(collect, forEach) is called.
+ * Can be sequential or parallel -> if you use parallel streams, it will be executed by multiple threads
+                                    we can use this if we are dealing with large data.
+
+ * Single use -> Once a stream is consumed, it cannot be reused.
+
+
+
+Stream Pipeline Structure:
+
+1) Source -> Collection or Array.
+2) Intermediate Operations(lazy) -> Transform stream(map, filter, sorted).
+3) Terminal Operations(eager) -> Produce result(collect, forEach, reduce).
+
+
+Commonly used methods:
+
+Terminal methods: it will materialize the data which can be stored in a variable.
+ * forEach() -> iterate every element.
+ * reduce() -> it reduces a stream to a single value.
+ * collect() -> Gathers results into a collection (List, Map Set).
+ * anyMatch() / allMatch()/ noneMatch -> Check conditions on elements.
+ * count() -> count the elements in the stream.
+ * findFirst() / findAny() -> Get an element.
+
+
+ Intermediate methods: it is more like updating data in stream by building pipeline.
+  * map() -> Transform each element into another form.
+  * filter() -> Select items that match a condition.
+  * sorted() -> Sort elements(natural or custom order).
+  * distinct() -> Remove duplicate elements.
+  * limit() -> Take only first n elements.
+  * skip() -> Skip the first n elements.

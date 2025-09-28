@@ -1,0 +1,20 @@
+-> Maven and Gradle are dependency management and build automation tools
+   used in SpringBoot.
+
+   They handle:
+   * Compiling code
+   * Downloading Libraries
+   * Packaging into JAR/WAR
+   * Managing dependencies
+   * Running Tests
+   * Building and Deploying the app.
+
+
+Maven: XML-based(pom.xml)
+      * Dependency management via Maven Central repository.
+      * Very Structured.
+
+Gradle: Groovy/Kotlin-based(build.gradle)
+        * faster when compared to Maven
+        * Commonly used in android.
+

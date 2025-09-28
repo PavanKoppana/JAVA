@@ -1,0 +1,8 @@
+Spring Configuration: it the information or blueprint that tells the Spring Core Container(IoC container, Application Context, Bean Factory)
+                      about which beans to manage, how to wire them and their lifecycle details.
+
+it can be achieved by:
+
+1) XML Configuration -> old-school way, define beans in an XML file.
+2) Annotations -> modern way, using @Component, @Autowired, etc.
+3) Java-based Configuration -> using @Configuration and @Bean methods.
