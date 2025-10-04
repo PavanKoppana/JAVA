@@ -1,0 +1,45 @@
+Spring Boot Auto-Configuration feature automatically configures
+beans(components, services, settings) based on dependencies on the class path.
+it is powered by: @EnableAutoConfiguration(Part of @SpringBootApplication)
+
+* This means you can get started quickly (no need manually configure dispatcher servlet, Jackson etc.)
+
+
+Auto Configuration Covers:
+
+-> Starter Dependencies
+-> Web & MVC
+     * Configures Dispatcher Servlet
+     * Configures Embedded Web Server(Tomcat, Jetty)
+     * Sets up JSON/Jackson for request/response serialization
+-> Data & Persistence
+     * JPA/Hibernate Auto-Config
+     * Spring Data Repositories - Automatically Scans @Repository interfaces
+-> Messaging
+-> Caching
+-> Security
+-> Actuator & Monitoring
+
+
+Implementation:
+
+ 1) it can be implemented by using @EnableAutoConfiguration, but if you are using
+    @SpringBootApplication it will internally have @@EnableAutoConfiguration, so you don't
+    need to explicitly define it. Spring Boot looks in META-INF/spring.factories or META/-INF
+    AutoConfiguration.imports. These files list all the autoconfigure classes that boot should consider.
+
+ 2) Auto-Configuration classes - These classes are regular @Configuration classes with conditional logic.
+
+ 3) Conditional Annotations:
+    * @ConditionalOnClass - load beans if class exists in class path.
+    * @ConditionalOnMissingBean - load bean if not already defined.
+    * @ConditionalOnProperty - load bean if specific property is set.
+    * @ConditionalOnWebApplication - only in web context.
+    * @ConditionalOnResource - load if resource(like file) exists.
+
+
+what if you want to exclude some beans from autoconfiguration?
+
+-> We can use "exclude"
+-> We can disable using application.properties
+-> We can control using @Conditional Annotations.

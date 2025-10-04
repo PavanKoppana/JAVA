@@ -1,0 +1,178 @@
+package com.example.demo.controller;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+
+import javax.validation.Valid;
+import java.util.List;
+import java.util.ArrayList;
+
+// User entity class (for demonstration)
+class User {
+    private Long id;
+    private String name;
+    private int age;
+
+    // Constructors, getters, setters omitted for brevity
+
+    public User() {}
+
+    public User(Long id, String name, int age) {
+        this.id = id;
+        this.name = name;
+        this.age = age;
+    }
+
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
+
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
+
+    public int getAge() { return age; }
+    public void setAge(int age) { this.age = age; }
+}
+
+/**
+ * Main REST controller handling user-related HTTP requests.
+ */
+@RestController
+// Base URL path for all endpoints in this controller
+@RequestMapping("/api/users")
+public class UserController {
+
+    // In-memory user list for demo purposes
+    private List<User> users = new ArrayList<>();
+
+    /**
+     * GET /api/users
+     * Example of @RequestParam usage to filter users by minimum age.
+     * @param minAge Optional query parameter to filter users by age.
+     * @return List of users filtered by minAge if provided.
+     */
+    @GetMapping
+    public List<User> getUsers(@RequestParam(name = "minAge", required = false) Integer minAge) {
+        if (minAge == null) {
+            return users;
+        }
+        List<User> filtered = new ArrayList<>();
+        for (User user : users) {
+            if (user.getAge() >= minAge) {
+                filtered.add(user);
+            }
+        }
+        return filtered;
+    }
+
+    /**
+     * GET /api/users/{id}
+     * Example of @PathVariable usage to get a user by ID.
+     * @param id User ID extracted from URL path.
+     * @return User with the given ID.
+     */
+    @GetMapping("/{id}")
+    public User getUserById(@PathVariable Long id) {
+        return users.stream()
+                .filter(u -> u.getId().equals(id))
+                .findFirst()
+                .orElseThrow(() -> new UserNotFoundException("User not found with id: " + id));
+    }
+
+    /**
+     * POST /api/users
+     * Example of @RequestBody usage to create a new user.
+     * @param user User object deserialized from JSON request body.
+     * @return Created user.
+     */
+    @PostMapping
+    public User createUser(@Valid @RequestBody User user) {
+        user.setId((long) (users.size() + 1)); // Simple ID assignment
+        users.add(user);
+        return user;
+    }
+
+    /**
+     * PUT /api/users/{id}
+     * Update user details.
+     * @param id User ID from path.
+     * @param updatedUser User data from request body.
+     * @return Updated user.
+     */
+    @PutMapping("/{id}")
+    public User updateUser(@PathVariable Long id, @Valid @RequestBody User updatedUser) {
+        User existingUser = users.stream()
+                .filter(u -> u.getId().equals(id))
+                .findFirst()
+                .orElseThrow(() -> new UserNotFoundException("User not found with id: " + id));
+
+        existingUser.setName(updatedUser.getName());
+        existingUser.setAge(updatedUser.getAge());
+        return existingUser;
+    }
+
+    /**
+     * DELETE /api/users/{id}
+     * Delete a user by ID.
+     * @param id User ID from path.
+     * @return Success message.
+     */
+    @DeleteMapping("/{id}")
+    public String deleteUser(@PathVariable Long id) {
+        boolean removed = users.removeIf(u -> u.getId().equals(id));
+        if (!removed) {
+            throw new UserNotFoundException("User not found with id: " + id);
+        }
+        return "User deleted successfully";
+    }
+}
+
+/**
+ * Custom exception for user not found scenarios.
+ */
+@ResponseStatus(HttpStatus.NOT_FOUND)
+class UserNotFoundException extends RuntimeException {
+    public UserNotFoundException(String message) {
+        super(message);
+    }
+}
+
+/**
+ * Global exception handler using @ControllerAdvice.
+ * Handles exceptions thrown by any controller.
+ */
+@ControllerAdvice
+class GlobalExceptionHandler {
+
+    /**
+     * Handles UserNotFoundException globally.
+     * @param ex Exception instance.
+     * @return ResponseEntity with error message and 404 status.
+     */
+    @ExceptionHandler(UserNotFoundException.class)
+    public ResponseEntity<String> handleUserNotFound(UserNotFoundException ex) {
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
+    }
+
+    /**
+     * Handles validation errors for @Valid annotated request bodies.
+     * @param ex Exception instance.
+     * @return ResponseEntity with error message and 400 status.
+     */
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<String> handleValidationErrors(MethodArgumentNotValidException ex) {
+        return new ResponseEntity<>("Validation error: " + ex.getMessage(), HttpStatus.BAD_REQUEST);
+    }
+
+    /**
+     * Handles all other exceptions.
+     * @param ex Exception instance.
+     * @return ResponseEntity with generic error message and 500 status.
+     */
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<String> handleAllExceptions(Exception ex) {
+        return new ResponseEntity<>("Internal server error: " + ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+}

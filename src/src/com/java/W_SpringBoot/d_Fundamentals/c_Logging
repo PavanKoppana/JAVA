@@ -1,0 +1,3 @@
+Spring Boot uses Logback by default. We can configure logging in
+application.properties
+

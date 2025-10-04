@@ -1,0 +1,268 @@
+Perfect! Now that you understand the difference between default health and custom HealthIndicators, let’s create a comprehensive guide to Spring Boot Actuator:
+
+We’ll cover:
+
+1. All important annotations
+
+
+2. Built-in endpoints
+
+
+3. Custom endpoints & indicators
+
+
+4. Code examples + explanations
+
+
+5. Business scenarios
+
+
+
+
+---
+
+1️⃣ Core Actuator Annotations
+
+Annotation Purpose / Use Case Code Example / Notes
+
+@Component Register a custom HealthIndicator, InfoContributor, or Endpoint as a Spring bean @Component public class MyHealthIndicator implements HealthIndicator { ... }
+@Endpoint Define a custom Actuator endpoint (general-purpose) @Endpoint(id = "featureToggle") public class FeatureEndpoint { ... }
+@WebEndpoint Define a custom endpoint exposed only via HTTP @WebEndpoint(id = "customStatus") public class StatusEndpoint { ... }
+@ReadOperation Mark a method as GET for a custom endpoint Used inside @Endpoint or @WebEndpoint
+@WriteOperation Mark a method as POST/PUT for a custom endpoint Allows modification of state
+@DeleteOperation Mark a method as DELETE For cleaning or resetting
+@HealthIndicator (interface) Implement for custom health checks Always combined with @Component
+
+
+
+---
+
+2️⃣ Built-in Actuator Endpoints
+
+Endpoint Description Use Case
+
+/actuator/health Shows overall health of the app Basic system check; includes custom HealthIndicators automatically
+/actuator/info Shows app info, version, metadata Expose build info, environment, author
+/actuator/metrics Shows metrics like JVM memory, GC, HTTP request counts Monitoring system performance
+/actuator/beans Shows all Spring beans Debugging & troubleshooting
+/actuator/env Shows environment properties Inspect configuration
+/actuator/loggers Shows & changes log levels at runtime Useful in production
+/actuator/threaddump Provides JVM thread dump Debugging performance issues
+/actuator/mappings Shows all controller mappings Inspect REST endpoints
+/actuator/prometheus Expose metrics for Prometheus (if Micrometer is added) Monitoring integration
+
+
+> You can enable/disable endpoints in application.yml:
+
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+
+
+---
+
+3️⃣ Custom HealthIndicator Example
+
+import org.springframework.boot.actuate.health.Health;
+import org.springframework.boot.actuate.health.HealthIndicator;
+import org.springframework.stereotype.Component;
+
+@Component
+public class PaymentGatewayHealthIndicator implements HealthIndicator {
+
+    @Override
+    public Health health() {
+        boolean gatewayUp = checkPaymentGateway();
+        if (gatewayUp) {
+            return Health.up().withDetail("PaymentGateway", "Available").build();
+        } else {
+            return Health.down().withDetail("PaymentGateway", "Unavailable").build();
+        }
+    }
+
+    private boolean checkPaymentGateway() {
+        // simulate API ping
+        return true;
+    }
+}
+
+Access via /actuator/health
+
+Merges automatically with other health indicators
+
+
+
+---
+
+4️⃣ Custom InfoContributor Example
+
+import org.springframework.boot.actuate.info.Info;
+import org.springframework.boot.actuate.info.InfoContributor;
+import org.springframework.stereotype.Component;
+import java.util.Map;
+
+@Component
+public class AppInfoContributor implements InfoContributor {
+
+    @Override
+    public void contribute(Info.Builder builder) {
+        builder.withDetail("app", Map.of(
+                "name", "Payment Service",
+                "version", "2.1.0",
+                "environment", "production"
+        ));
+    }
+}
+
+Access via /actuator/info
+
+
+
+---
+
+5️⃣ Custom Endpoint Example
+
+import org.springframework.boot.actuate.endpoint.annotation.Endpoint;
+import org.springframework.boot.actuate.endpoint.annotation.ReadOperation;
+import org.springframework.boot.actuate.endpoint.annotation.WriteOperation;
+import org.springframework.stereotype.Component;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.Map;
+
+@Component
+@Endpoint(id = "featureToggle")
+public class FeatureToggleEndpoint {
+
+    private AtomicBoolean enabled = new AtomicBoolean(false);
+
+    @ReadOperation
+    public Map<String, Boolean> read() {
+        return Map.of("enabled", enabled.get());
+    }
+
+    @WriteOperation
+    public Map<String, Boolean> toggle(boolean enable) {
+        enabled.set(enable);
+        return Map.of("enabled", enabled.get());
+    }
+}
+
+GET /actuator/featureToggle → reads current state
+
+POST /actuator/featureToggle?enable=true → toggles feature
+
+
+
+---
+
+6️⃣ Metrics Example
+
+import io.micrometer.core.instrument.MeterRegistry;
+import org.springframework.stereotype.Component;
+
+@Component
+public class OrderMetrics {
+
+    private final MeterRegistry meterRegistry;
+
+    public OrderMetrics(MeterRegistry meterRegistry) {
+        this.meterRegistry = meterRegistry;
+    }
+
+    public void recordOrderPlaced() {
+        meterRegistry.counter("orders.placed.count").increment();
+    }
+}
+
+Access via /actuator/metrics/orders.placed.count
+
+
+
+---
+
+7️⃣ Business Scenarios
+
+Scenario Annotation/Endpoint How Used
+
+Monitor DB connectivity HealthIndicator + /actuator/health Custom DB ping
+Monitor external API HealthIndicator + /actuator/health Payment gateway, SMS service
+Track business metrics MeterRegistry + /actuator/metrics Orders processed, login rate
+Expose app info InfoContributor + /actuator/info Version, build, environment
+Feature toggle @Endpoint + @ReadOperation/@WriteOperation Enable/disable features at runtime
+Custom status check @WebEndpoint HTTP-only monitoring of specific components
+
+
+
+---
+
+8️⃣ Important Notes
+
+1. Default /actuator/health: system-level, includes auto-configured and custom HealthIndicators
+
+
+2. Custom HealthIndicators: add business-level checks
+
+
+3. Metrics: track business or system performance
+
+
+4. InfoContributor: show metadata
+
+
+5. Custom endpoints: for feature toggles, runtime controls, specialized monitoring
+
+
+6. Annotations are mostly declarative: you rarely call them manually; Spring handles wiring
+
+
+
+
+---
+
+✅ Summary Diagram (Conceptual)
+
+/actuator/health
+├── DiskSpaceHealthIndicator  (built-in)
+├── DatabaseHealthIndicator   (custom)
+├── PaymentGatewayHealthIndicator (custom)
+└── Other system checks
+
+/actuator/metrics
+├── jvm.memory.used
+├── http.server.requests
+└── orders.placed.count (custom)
+
+@Endpoint / @WebEndpoint
+├── featureToggle
+├── customStatus
+└── other runtime controls
+
+/actuator/info
+├── app name
+├── version
+└── environment
+
+
+---
+
+If you want, I can create a single mini-project example combining:
+
+Default health
+
+Custom health indicators
+
+InfoContributor
+
+Metrics
+
+Custom endpoints
+
+
+…so you can see all annotations + endpoints in action in one working Spring Boot app.

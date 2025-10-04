@@ -1,0 +1,148 @@
+🔹 What is Bean Scope?
+
+When Spring creates a bean, it needs to know:
+
+Should the same instance be reused everywhere (singleton)?
+
+Or should a new instance be created each time (prototype)?
+
+Or should its lifecycle be tied to web requests/sessions?
+
+
+👉 Bean Scope tells Spring how to manage the lifecycle and visibility of a bean.
+
+
+---
+
+🔹 Common Bean Scopes in Spring
+
+Spring defines several scopes. The main ones are:
+
+1️⃣ singleton (Default)
+
+Only one instance of the bean is created in the ApplicationContext.
+
+Every injection of that bean will point to the same object.
+
+Annotation: @Scope("singleton") (but usually not needed, since it's default).
+
+
+@Component
+@Scope("singleton")
+public class PaymentService {
+}
+
+Real-time Example:
+A logging service or configuration service — one instance is enough across the app.
+
+
+---
+
+2️⃣ prototype
+
+A new bean instance is created each time it’s requested.
+
+Annotation: @Scope("prototype").
+
+
+@Component
+@Scope("prototype")
+public class ReportGenerator {
+}
+
+Real-time Example:
+A report generator or PDF exporter — each request might need a fresh object with different parameters.
+
+
+---
+
+3️⃣ request (Web Only)
+
+A new bean instance is created per HTTP request.
+
+Valid only in web applications.
+
+Annotation: @Scope("request").
+
+
+@Component
+@Scope("request")
+public class RequestTracker {
+}
+
+Real-time Example:
+A bean storing user request data like IP address, request ID — unique per HTTP request.
+
+
+---
+
+4️⃣ session (Web Only)
+
+A new bean instance is created per HTTP session.
+
+Annotation: @Scope("session").
+
+
+@Component
+@Scope("session")
+public class UserSessionData {
+}
+
+Real-time Example:
+A bean holding shopping cart info — tied to the user’s session, survives across multiple requests until logout.
+
+
+---
+
+5️⃣ application (Web Only)
+
+A single bean instance is created per ServletContext (similar to singleton but in web scope).
+
+Annotation: @Scope("application").
+
+
+@Component
+@Scope("application")
+public class AppWideCache {
+}
+
+Real-time Example:
+An application-wide cache shared across all sessions and requests.
+
+
+---
+
+6️⃣ websocket (WebSocket Only)
+
+A bean instance is created per WebSocket session.
+
+Annotation: @Scope("websocket").
+
+
+@Component
+@Scope("websocket")
+public class WebSocketSessionHandler {
+}
+
+Real-time Example:
+A chat session handler in a real-time chat application.
+
+
+---
+
+🔹 Summary Table of Bean Scopes
+
+Scope Description Example Use Case
+
+singleton One shared instance for the whole container Logging service, Config bean
+prototype New instance every time requested Report generator, PDF exporter
+request One instance per HTTP request Request audit log, Request ID
+session One instance per HTTP session Shopping cart, User profile
+application One instance per ServletContext (web) App-wide cache, Config state
+websocket One instance per WebSocket session Chat session handler
+
+
+
+---
+
+✅ Default scope in Spring is singleton.

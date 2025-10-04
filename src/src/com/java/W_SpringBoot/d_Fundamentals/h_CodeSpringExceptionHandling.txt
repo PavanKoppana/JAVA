@@ -1,0 +1,158 @@
+1. Local handling of a built-in exception
+
+
+2. Global handling of a built-in exception
+
+
+3. Local handling of a custom exception
+
+
+4. Global handling of a custom exception
+
+
+
+
+---
+
+1️⃣ Custom Exceptions
+
+package com.example.demo.exception;
+
+public class CustomBadRequestException extends RuntimeException {
+    public CustomBadRequestException(String message) {
+        super(message);
+    }
+}
+
+package com.example.demo.exception;
+
+public class CustomNotFoundException extends RuntimeException {
+    public CustomNotFoundException(String message) {
+        super(message);
+    }
+}
+
+
+---
+
+2️⃣ Controller with both Local and Global exception usage
+
+package com.example.demo.controller;
+
+import com.example.demo.exception.CustomBadRequestException;
+import com.example.demo.exception.CustomNotFoundException;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping("/api/demo")
+public class DemoController {
+
+    // Example 1: Local handling of a built-in exception
+    @GetMapping("/divide/{a}/{b}")
+    public String divide(@PathVariable int a, @PathVariable int b) {
+        // Will throw ArithmeticException if b=0
+        return "Result = " + (a / b);
+    }
+
+    // Local handler for ArithmeticException (only applies to this controller)
+    @ExceptionHandler(ArithmeticException.class)
+    public ResponseEntity<String> handleArithmetic(ArithmeticException ex) {
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .body("Local Handler (Built-in Exception): Division error - " + ex.getMessage());
+    }
+
+    // Example 2: Global handling of a built-in exception
+    @GetMapping("/illegal/{id}")
+    public String illegalArgument(@PathVariable int id) {
+        if (id < 0) {
+            throw new IllegalArgumentException("ID cannot be negative");
+        }
+        return "Valid ID: " + id;
+    }
+
+    // Example 3: Local handling of a custom exception
+    @GetMapping("/badrequest/{value}")
+    public String badRequest(@PathVariable int value) {
+        if (value == 0) {
+            throw new CustomBadRequestException("Value cannot be zero");
+        }
+        return "Value is " + value;
+    }
+
+    // Local handler for CustomBadRequestException
+    @ExceptionHandler(CustomBadRequestException.class)
+    public ResponseEntity<String> handleCustomBadRequest(CustomBadRequestException ex) {
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .body("Local Handler (Custom Exception): " + ex.getMessage());
+    }
+
+    // Example 4: Global handling of a custom exception
+    @GetMapping("/notfound/{id}")
+    public String notFound(@PathVariable int id) {
+        if (id != 1) {
+            throw new CustomNotFoundException("Resource not found with ID: " + id);
+        }
+        return "Found resource with ID " + id;
+    }
+}
+
+
+---
+
+3️⃣ Global Exception Handler (@ControllerAdvice)
+
+package com.example.demo.exception;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+
+@ControllerAdvice
+public class GlobalExceptionHandler {
+
+    // Global handling of built-in exception
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<String> handleIllegalArgument(IllegalArgumentException ex) {
+        return ResponseEntity
+                .badRequest()
+                .body("Global Handler (Built-in Exception): " + ex.getMessage());
+    }
+
+    // Global handling of custom exception
+    @ExceptionHandler(CustomNotFoundException.class)
+    public ResponseEntity<String> handleCustomNotFound(CustomNotFoundException ex) {
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .body("Global Handler (Custom Exception): " + ex.getMessage());
+    }
+
+    // Fallback for any uncaught exceptions
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<String> handleGeneric(Exception ex) {
+        return ResponseEntity
+                .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body("Global Handler (Generic): " + ex.getMessage());
+    }
+}
+
+
+---
+
+🔹 How this behaves
+
+/api/demo/divide/10/0 → ArithmeticException → handled locally →
+Local Handler (Built-in Exception): Division error - / by zero
+
+/api/demo/illegal/-1 → IllegalArgumentException → handled globally →
+Global Handler (Built-in Exception): ID cannot be negative
+
+/api/demo/badrequest/0 → CustomBadRequestException → handled locally →
+Local Handler (Custom Exception): Value cannot be zero
+
+/api/demo/notfound/99 → CustomNotFoundException → handled globally →
+Global Handler (Custom Exception): Resource not found with ID: 99

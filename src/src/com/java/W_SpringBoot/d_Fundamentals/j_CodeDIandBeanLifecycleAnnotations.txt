@@ -1,0 +1,277 @@
+Awesome 🙌 Let’s build a mini Spring Boot example project where we use all six annotations (@Autowired, @Qualifier, @Primary, @Lazy, @PostConstruct, @PreDestroy) in a single flow.
+
+
+---
+
+🔹 Business Scenario
+
+We’re building a simple e-commerce order system:
+
+1. Multiple Payment Gateways (PayPal, Stripe, Razorpay).
+
+Use @Primary + @Qualifier for injection.
+
+
+
+2. Report Generator (heavy resource).
+
+Use @Lazy so it’s only created when needed.
+
+
+
+3. Cache Service.
+
+Load data after bean creation (@PostConstruct).
+
+
+
+4. Database Connection.
+
+Needs cleanup before shutdown (@PreDestroy).
+
+
+
+
+
+---
+
+🔹 Project Code
+
+1. Payment Gateway Interface
+
+package com.example.demo.payment;
+
+public interface PaymentGateway {
+    void pay(double amount);
+}
+
+
+---
+
+2. Payment Beans (@Primary + @Qualifier)
+
+package com.example.demo.config;
+
+import com.example.demo.payment.PaymentGateway;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
+
+@Configuration
+public class PaymentConfig {
+
+    @Bean
+    @Primary
+    public PaymentGateway paypalGateway() {
+        return amount -> System.out.println("Paid $" + amount + " via PayPal (Default)");
+    }
+
+    @Bean
+    public PaymentGateway stripeGateway() {
+        return amount -> System.out.println("Paid $" + amount + " via Stripe");
+    }
+
+    @Bean(name = "razorpayGateway")
+    public PaymentGateway razorpayGateway() {
+        return amount -> System.out.println("Paid ₹" + amount + " via Razorpay");
+    }
+}
+
+
+---
+
+3. Order Service (@Autowired, @Qualifier)
+
+package com.example.demo.service;
+
+import com.example.demo.payment.PaymentGateway;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
+
+@Service
+public class OrderService {
+
+    private final PaymentGateway defaultGateway;
+    private final PaymentGateway stripeGateway;
+
+    @Autowired
+    public OrderService(PaymentGateway defaultGateway,
+                        @Qualifier("stripeGateway") PaymentGateway stripeGateway) {
+        this.defaultGateway = defaultGateway;   // PayPal (because @Primary)
+        this.stripeGateway = stripeGateway;     // Stripe explicitly chosen
+    }
+
+    public void checkoutDefault(double amount) {
+        defaultGateway.pay(amount);
+    }
+
+    public void checkoutStripe(double amount) {
+        stripeGateway.pay(amount);
+    }
+}
+
+
+---
+
+4. Report Generator (@Lazy)
+
+package com.example.demo.reports;
+
+import org.springframework.context.annotation.Lazy;
+import org.springframework.stereotype.Component;
+
+@Component
+@Lazy
+public class ReportGenerator {
+
+    public ReportGenerator() {
+        System.out.println("ReportGenerator bean created!");
+    }
+
+    public void generate() {
+        System.out.println("Report generated!");
+    }
+}
+
+
+---
+
+5. Cache Service (@PostConstruct)
+
+package com.example.demo.cache;
+
+import jakarta.annotation.PostConstruct;
+import org.springframework.stereotype.Component;
+
+@Component
+public class CacheService {
+
+    @PostConstruct
+    public void loadCache() {
+        System.out.println("Cache loaded at startup");
+    }
+
+    public String getData() {
+        return "Cached Data";
+    }
+}
+
+
+---
+
+6. Database Connection (@PreDestroy)
+
+package com.example.demo.db;
+
+import jakarta.annotation.PreDestroy;
+import org.springframework.stereotype.Component;
+
+@Component
+public class DatabaseConnection {
+
+    public void connect() {
+        System.out.println("DB Connection established");
+    }
+
+    @PreDestroy
+    public void closeConnection() {
+        System.out.println("DB Connection closed before shutdown");
+    }
+}
+
+
+---
+
+7. Main App Runner
+
+package com.example.demo;
+
+import com.example.demo.reports.ReportGenerator;
+import com.example.demo.service.OrderService;
+import com.example.demo.cache.CacheService;
+import com.example.demo.db.DatabaseConnection;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ApplicationContext;
+
+@SpringBootApplication
+public class DemoApplication implements CommandLineRunner {
+
+    private final OrderService orderService;
+    private final ReportGenerator reportGenerator;
+    private final CacheService cacheService;
+    private final DatabaseConnection dbConnection;
+
+    public DemoApplication(OrderService orderService,
+                           ReportGenerator reportGenerator,
+                           CacheService cacheService,
+                           DatabaseConnection dbConnection) {
+        this.orderService = orderService;
+        this.reportGenerator = reportGenerator;
+        this.cacheService = cacheService;
+        this.dbConnection = dbConnection;
+    }
+
+    public static void main(String[] args) {
+        SpringApplication.run(DemoApplication.class, args);
+    }
+
+    @Override
+    public void run(String... args) {
+        System.out.println("\n=== Application Started ===");
+
+        dbConnection.connect();
+
+        orderService.checkoutDefault(100);   // Uses PayPal (@Primary)
+        orderService.checkoutStripe(200);    // Uses Stripe (@Qualifier)
+
+        System.out.println("Cache Data: " + cacheService.getData());
+
+        System.out.println("Generating report now...");
+        reportGenerator.generate();  // Lazy bean created here
+
+        System.out.println("=== End of App Run ===\n");
+    }
+}
+
+
+---
+
+🔹 Expected Console Output
+
+Cache loaded at startup
+=== Application Started ===
+DB Connection established
+Paid $100.0 via PayPal (Default)
+Paid $200.0 via Stripe
+Cache Data: Cached Data
+Generating report now...
+ReportGenerator bean created!
+Report generated!
+=== End of App Run ===
+DB Connection closed before shutdown
+
+
+---
+
+✅ Recap
+
+@Autowired → Injects beans automatically.
+
+@Qualifier → Picks a specific bean when multiple exist.
+
+@Primary → Marks one bean as the default.
+
+@Lazy → Bean created only when first used.
+
+@PostConstruct → Runs init logic after bean creation.
+
+@PreDestroy → Runs cleanup logic before shutdown.
+
+
+
+---
+
+👉 Do you want me to also show how this same setup could be exposed as REST endpoints (e.g., /pay/default, /pay/stripe, /report) instead of just running in CommandLineRunner? That way you can test with Postman/Browser.

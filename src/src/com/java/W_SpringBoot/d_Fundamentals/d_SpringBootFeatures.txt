@@ -1,0 +1,17 @@
+Features of Spring Boot:
+
+-> Inversion of Control
+-> Dependency Injection
+-> Auto-Configuration
+-> Starter Dependencies
+-> Embedded Servers
+-> Externalized Configuration
+-> Profiles
+-> Spring Boot Actuator
+-> Logging
+-> DevTools
+-> CommandLineRunner & ApplicationRunner
+-> Spring Boot Initializer
+-> Caching
+-> Scheduling & Async
+-> Testing Support

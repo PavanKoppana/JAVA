@@ -1,0 +1,25 @@
+Spring: it is an open-source Java framework providing a robust infrastructure for building
+        enterprise-level applications. it core features include:
+
+        -> Inversion of Control
+        -> Dependency Injection
+        -> Aspect-Oriented programming
+        -> Supports various technologies like JPA, Hibernate, Spring MVC.
+
+
+
+Spring Boot: it is an open-source, Java-based framework used to create stand-alone, production-ready
+             Spring applications with minimal configuration. Built on top of the Spring Framework, it
+             simplifies bootstrapping and development by offering default settings and reducing boiler plate.
+
+             -> Embedded servers(Tomcat, Jetty)
+             -> Auto-Configuration
+             -> Starter Dependencies
+
+Aspect Oriented programming: it allows us to write cross-cutting concerns once(as aspects) and apply
+                             them automatically to multiple services. In a banking system. AOP cleanly
+                             separates logging, security, and transactions from the business logic
+                             like transfer() or withdraw().
+
+
+

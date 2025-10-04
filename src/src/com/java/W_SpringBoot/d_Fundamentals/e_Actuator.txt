@@ -1,0 +1,13 @@
+Spring Boot Actuator: it is a feature that adds production ready capabilities to the Spring Boot
+                      application. making it easier to monitor, manage, and debug the production
+                      environment. it provides some end points which will expose the data about the
+                      original end point.
+
+    -> For example you have one end point which will return you some response. in the ending if you
+       replace the controller with actuator/health. it will return a JSON with health metrics of that
+       endpoint. basically it will create some controllers internally which we can use to monitor, manage
+       and debug the application while it was running.
+
+
+Spring Boot Initializer: it will help us to initialize the Spring Boot Projects
+                         with minimal user configuration.
