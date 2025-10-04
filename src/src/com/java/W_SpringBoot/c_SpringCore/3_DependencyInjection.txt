@@ -1,0 +1,27 @@
+Dependency Injection: it is mechanism which will implement Inversion of Control. Instead
+                      of creating objects manually using new, Spring injects the required
+                      dependencies at runtime.
+
+Types of DI:
+
+1) Constructor Injection: Dependencies are provided through the class constructor.
+                          Ensures the dependency is available at object creation. if dependency is not available
+                          application will fail.
+                          
+* Dependencies are injected by constructors. it's whenever you call the
+   constructor(in Sping Boot you can directly call class it will run the constructor which is
+   having annotation @Autowired). Refer code for more details.
+
+
+2) Setter Injection: Dependencies are provided through setters. this is best practice for optional
+                     dependencies.for example you want to continue even though the dependency is not
+                      available, you can use setter injection. Refer code for more examples.
+
+3) Field injection: Dependencies are injected directly into fields using @Autowired.
+                    violates principles like immutability and constructor clarity. Refer code for more
+                    details.
+
+
+
+
+

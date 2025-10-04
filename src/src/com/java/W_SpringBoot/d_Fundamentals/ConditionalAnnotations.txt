@@ -1,0 +1,188 @@
+Excellent topic 🚀 — these annotations are part of Spring Boot’s Conditional & Auto-Configuration mechanism. They give you fine-grained control over what gets configured at runtime, depending on the environment, classpath, or properties.
+
+Let’s break each one with code + real-world scenarios.
+
+
+---
+
+🔹 1. @ConditionalOnClass
+
+Purpose: Load a configuration only if a certain class is present in the classpath.
+
+Code Example:
+
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+@ConditionalOnClass(name = "com.mysql.cj.jdbc.Driver")
+public class MySQLAutoConfig {
+
+    @Bean
+    public String mysqlBean() {
+        return "MySQL Driver detected, MySQL Bean Loaded!";
+    }
+}
+
+Real-time Scenario:
+
+If MySQL driver JAR is on the classpath, configure a DataSource.
+
+If not, skip MySQL-related config (maybe fallback to H2 in-memory DB).
+
+
+
+
+---
+
+🔹 2. @ConditionalOnMissingBean
+
+Purpose: Define a bean only if it hasn’t been defined already (avoid duplication).
+
+Code Example:
+
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+public class CacheConfig {
+
+    @Bean
+    @ConditionalOnMissingBean(CacheService.class)
+    public CacheService defaultCacheService() {
+        return new InMemoryCacheService();
+    }
+}
+
+Real-time Scenario:
+
+If the user didn’t provide their own CacheService bean, Spring Boot auto-configures a default in-memory cache.
+
+If a custom bean is already defined, Boot won’t override it.
+
+
+
+
+---
+
+🔹 3. @ConditionalOnProperty
+
+Purpose: Load configuration only when a property exists (and matches a value) in application.properties or application.yml.
+
+Code Example:
+
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+public class EmailConfig {
+
+    @Bean
+    @ConditionalOnProperty(name = "email.enabled", havingValue = "true", matchIfMissing = false)
+    public EmailService emailService() {
+        return new EmailService();
+    }
+}
+
+Real-time Scenario:
+
+If email.enabled=true → load EmailService (for sending real emails).
+
+If disabled → don’t configure it (use dummy logger instead).
+
+
+application.yml:
+
+email:
+  enabled: true
+
+
+
+---
+
+🔹 4. @ConditionalOnWebApplication / @ConditionalOnNotWebApplication
+
+Purpose: Load beans depending on whether the app is a web application or non-web (CLI, batch, etc.).
+
+Code Example:
+
+import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnNotWebApplication;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+public class WebOrBatchConfig {
+
+    @Bean
+    @ConditionalOnWebApplication
+    public String webBean() {
+        return "Running in Web Mode";
+    }
+
+    @Bean
+    @ConditionalOnNotWebApplication
+    public String batchBean() {
+        return "Running in Batch/CLI Mode";
+    }
+}
+
+Real-time Scenario:
+
+If running as a Spring MVC app → load controllers, filters, web beans.
+
+If running as a Spring Batch job → load batch beans, skip web beans.
+
+
+
+
+---
+
+🔹 5. @EnableAutoConfiguration(exclude = …)
+
+Purpose: Exclude specific auto-configuration classes if you don’t want Spring Boot to configure them.
+
+Code Example:
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
+
+@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
+public class NoDbApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(NoDbApplication.class, args);
+    }
+}
+
+Real-time Scenario:
+
+If you’re building a REST API without a database, you might not want Boot to auto-configure a DataSource.
+
+Excluding it avoids DataSource related errors (like Cannot determine embedded database driver class).
+
+
+
+
+---
+
+✅ Summary Table
+
+Annotation Purpose Real-World Example
+
+@ConditionalOnClass Configure bean only if a class exists in classpath Configure MySQL DataSource if MySQL driver present
+@ConditionalOnMissingBean Load default bean only if not already defined Provide default CacheService if user didn’t
+@ConditionalOnProperty Load bean/config only if property set in application.yml Enable EmailService only if email.enabled=true
+@ConditionalOnWebApplication Apply config only in a web app Load DispatcherServlet configs
+@ConditionalOnNotWebApplication Apply config only in CLI / batch apps Load batch jobs only
+@EnableAutoConfiguration(exclude=…) Exclude specific auto-configurations Exclude DB auto-config for no-DB apps
+
+
+
+---
+
+⚡ These are the building blocks behind Spring Boot’s auto-configuration.
+They let Boot be smart — configuring beans only when needed.

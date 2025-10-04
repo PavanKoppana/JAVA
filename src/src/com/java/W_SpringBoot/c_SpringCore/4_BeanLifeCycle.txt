@@ -1,0 +1,30 @@
+Bean -> A bean is basically a java object managed by spring. Spring creates it, wires its dependencies
+        and manages its life cycle.
+
+Hooks in Bean Lifecycle: methods or interfaces that allow you to "hook into" the lifecycle of a bean
+                         at specific points (before init, after init, or during destruction)
+        * Purpose: To run custom logic at lifecycle events without modifying the bean code itself.
+
+Bean Life Cycle:
+
+1) Instantiation: Spring creates an empty bean object.
+        * Scenario: Spring calls new DatabaseConnection().
+
+2) Populate Properties(Dependency Injection): Spring injects required values or dependencies.
+         * Scenario: Injects DB URL, username, password into DatabaseConnection.
+
+3) Pre-initialization(BeanPostProcessor before init): Custom logic runs before initialization.
+         * Scenario: A logger prints "DB bean is about to initialize".
+         Important Note: pre initialization only happens if you write any custom logic using bean lifecycle hooks.
+
+4) Initialization:
+          * Scenario: DatabaseConnection opens a real DB connection.
+
+5) Ready for Use: Bean is now fully configured and can serve requests.
+          * App uses DatabaseConnection to fetch account details.
+
+6) Post-Initialization(BeanPostProcessor after init): Custom logic runs before initialization.
+          * Add monitoring or proxy around the DB bean.
+          Important Note: post initialization only happens if you write any custom logic using bean lifecycle hooks.
+7) Destruction:
+           * DatabaseConnection closes the DB connection before application shutdown.

@@ -1,0 +1,366 @@
+Perfect 🙌 — you’re asking for the ultimate validation cheat sheet + mini project — covering all major validation annotations (including @Valid, @Validated, numeric, text, date, boolean, custom, and nested validations).
+
+I’ll give you:
+✅ A comprehensive list of all key annotations
+✅ A mini Spring Boot example using a single DTO, single controller, and single error handler — but covering everything important.
+
+
+---
+
+🧠 1. Comprehensive List of Spring Boot Validation Annotations
+
+Grouped by category 👇
+
+🔹 Basic (Null / Empty Checks)
+
+Annotation Description
+
+@NotNull Must not be null
+@NotEmpty Must not be empty (for String, Collection, Map, Array)
+@NotBlank Must not be blank (non-whitespace for String)
+
+
+
+---
+
+🔹 String / Size Constraints
+
+Annotation Description
+
+@Size(min, max) String/Collection size limits
+@Pattern(regexp) Matches regex pattern
+@Email Must be valid email
+
+
+
+---
+
+🔹 Numeric Constraints
+
+Annotation Description
+
+@Min, @Max Numeric range
+@Positive, @PositiveOrZero Must be >0 or ≥0
+@Negative, @NegativeOrZero Must be <0 or ≤0
+@Digits(integer, fraction) Control decimal precision
+@DecimalMin, @DecimalMax Decimal boundary values
+
+
+
+---
+
+🔹 Date / Time Constraints
+
+Annotation Description
+
+@Past, @PastOrPresent Must be in past or present
+@Future, @FutureOrPresent Must be in future or present
+
+
+
+---
+
+🔹 Boolean Constraints
+
+Annotation Description
+
+@AssertTrue Must be true
+@AssertFalse Must be false
+
+
+
+---
+
+🔹 Object-Level
+
+Annotation Description
+
+@Valid Enables validation on an object (and nested objects)
+@Validated Spring’s version of @Valid (for groups, method-level validation)
+
+
+
+---
+
+🔹 Custom Validation
+
+Annotation Description
+
+@Constraint Used to create your own validation annotation
+
+
+
+---
+
+🧩 2. Mini Project Example (All-in-One)
+
+Let’s build a simple Spring Boot REST API for registering users — with every kind of validation in one compact example.
+
+
+---
+
+📁 UserDTO.java
+
+package com.example.demo.dto;
+
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.*;
+import java.math.BigDecimal;
+import java.time.LocalDate;
+
+public class UserDTO {
+
+    // 🔹 Basic validations
+    @NotBlank(message = "Name is required")
+    private String name;
+
+    @NotEmpty(message = "Username cannot be empty")
+    private String username;
+
+    @NotNull(message = "Email cannot be null")
+    @Email(message = "Invalid email format")
+    private String email;
+
+    // 🔹 String length and pattern
+    @Size(min = 8, max = 20, message = "Password must be 8–20 characters")
+    private String password;
+
+    @Pattern(regexp = "\\d{10}", message = "Phone number must be 10 digits")
+    private String phone;
+
+    // 🔹 Numeric
+    @Min(value = 18, message = "Minimum age is 18")
+    @Max(value = 60, message = "Maximum age is 60")
+    private int age;
+
+    @Positive(message = "Salary must be positive")
+    private BigDecimal salary;
+
+    @Digits(integer = 4, fraction = 2, message = "Rating must have up to 4 digits and 2 decimals")
+    private BigDecimal rating;
+
+    @DecimalMin(value = "0.01", message = "Amount must be >= 0.01")
+    @DecimalMax(value = "9999.99", message = "Amount must be <= 9999.99")
+    private BigDecimal purchaseAmount;
+
+    // 🔹 Date
+    @Past(message = "Date of birth must be in the past")
+    private LocalDate dob;
+
+    @Future(message = "Subscription expiry must be in the future")
+    private LocalDate subscriptionExpiry;
+
+    // 🔹 Boolean
+    @AssertTrue(message = "You must accept the terms")
+    private boolean acceptedTerms;
+
+    // 🔹 Nested validation
+    @Valid
+    private AddressDTO address;
+
+    // Getters and setters
+    // (omit for brevity or use Lombok @Data)
+}
+
+
+---
+
+📁 AddressDTO.java
+
+package com.example.demo.dto;
+
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
+
+public class AddressDTO {
+
+    @NotBlank(message = "City cannot be blank")
+    private String city;
+
+    @Size(min = 2, max = 2, message = "State code must be 2 letters")
+    private String state;
+
+    @Pattern(regexp = "\\d{5}", message = "ZIP code must be 5 digits")
+    private String zip;
+
+    // Getters and setters
+}
+
+
+---
+
+📁 UserController.java
+
+package com.example.demo.controller;
+
+import com.example.demo.dto.UserDTO;
+import jakarta.validation.Valid;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping("/api/users")
+public class UserController {
+
+    @PostMapping("/register")
+    public String registerUser(@Valid @RequestBody UserDTO user) {
+        return "✅ User registered successfully: " + user.getName();
+    }
+}
+
+
+---
+
+📁 GlobalExceptionHandler.java
+
+package com.example.demo.exception;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+@RestControllerAdvice
+public class GlobalExceptionHandler {
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<?> handleValidationExceptions(MethodArgumentNotValidException ex) {
+        List<String> errors = ex.getBindingResult()
+                .getFieldErrors()
+                .stream()
+                .map(e -> e.getField() + ": " + e.getDefaultMessage())
+                .collect(Collectors.toList());
+
+        return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
+    }
+}
+
+
+---
+
+📁 DemoApplication.java
+
+package com.example.demo;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class DemoApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(DemoApplication.class, args);
+    }
+}
+
+
+---
+
+🚀 Run Example
+
+POST → http://localhost:8080/api/users/register
+
+Invalid Request:
+
+{
+  "name": "",
+  "username": " ",
+  "email": "abc",
+  "password": "123",
+  "phone": "12345",
+  "age": 17,
+  "salary": -10,
+  "rating": 12345.123,
+  "purchaseAmount": 0,
+  "dob": "2030-01-01",
+  "subscriptionExpiry": "2020-01-01",
+  "acceptedTerms": false,
+  "address": {
+    "city": "",
+    "state": "XYZ",
+    "zip": "12"
+  }
+}
+
+Response (400 Bad Request):
+
+[
+  "name: Name is required",
+  "username: Username cannot be empty",
+  "email: Invalid email format",
+  "password: Password must be 8–20 characters",
+  "phone: Phone number must be 10 digits",
+  "age: Minimum age is 18",
+  "salary: Salary must be positive",
+  "rating: Rating must have up to 4 digits and 2 decimals",
+  "purchaseAmount: Amount must be >= 0.01",
+  "dob: Date of birth must be in the past",
+  "subscriptionExpiry: Subscription expiry must be in the future",
+  "acceptedTerms: You must accept the terms",
+  "address.city: City cannot be blank",
+  "address.state: State code must be 2 letters",
+  "address.zip: ZIP code must be 5 digits"
+]
+
+✅ Now all validation scenarios are covered — text, numbers, booleans, nested, date, and @Valid.
+
+
+---
+
+🧩 Optional — Example of Custom Validation
+
+📁 StrongPassword.java
+
+package com.example.demo.validation;
+
+import jakarta.validation.Constraint;
+import jakarta.validation.Payload;
+import java.lang.annotation.*;
+
+@Documented
+@Constraint(validatedBy = StrongPasswordValidator.class)
+@Target({ ElementType.FIELD })
+@Retention(RetentionPolicy.RUNTIME)
+public @interface StrongPassword {
+    String message() default "Password must have at least 1 uppercase, 1 number, and 1 special character";
+    Class<?>[] groups() default {};
+    Class<? extends Payload>[] payload() default {};
+}
+
+📁 StrongPasswordValidator.java
+
+package com.example.demo.validation;
+
+import jakarta.validation.ConstraintValidator;
+import jakarta.validation.ConstraintValidatorContext;
+
+public class StrongPasswordValidator implements ConstraintValidator<StrongPassword, String> {
+    @Override
+    public boolean isValid(String password, ConstraintValidatorContext context) {
+        if (password == null) return false;
+        return password.matches("^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*]).{8,}$");
+    }
+}
+
+Usage in UserDTO:
+
+@StrongPassword
+private String password;
+
+
+---
+
+✅ Final Summary
+
+Category Key Annotations
+
+Null / Empty @NotNull, @NotEmpty, @NotBlank
+String @Size, @Pattern, @Email
+Numeric @Min, @Max, @Positive, @DecimalMin, @Digits
+Date @Past, @Future, @PastOrPresent, @FutureOrPresent
+Boolean @AssertTrue, @AssertFalse
+Object-level @Valid, @Validated
+Custom @Constraint + ConstraintValidator

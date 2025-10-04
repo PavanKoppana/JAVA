@@ -1,0 +1,22 @@
+Inversion of Control: it is a design principle where the control of object creation and dependency
+                      injection is managed by container(ApplicationContext) instead of java application
+                      code.
+ * In Spring the IoC container will manage the lifecycle of an object automatically.
+
+Example Scenario:
+
+   - In plain Java, you create new instances of classes using the new keyword whenever you need them,
+     which means each request or thread might create new objects.
+
+   - In a Spring application, classes annotated with stereotypes like @Service, @Repository,
+     @Controller, or beans defined via @Bean methods in @Configuration classes are instantiated by
+     the Spring IoC container at application startup (by default, as singleton beans).
+
+   - These beans are stored in the IoC container and reused throughout the application lifecycle.
+
+   - When a request comes in, a thread from the Tomcat thread pool handles it and uses the existing
+     bean instance from the container rather than creating a new one.
+
+   - This reuse of beans improves performance by avoiding repeated object creation and also
+     supports features like dependency injection, lifecycle management, and proxying.
+

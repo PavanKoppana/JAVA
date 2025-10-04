@@ -1,0 +1,205 @@
+🔹 1. @ConfigurationProperties
+
+Purpose:
+
+Binds external configuration (from application.properties or application.yml) into a POJO class.
+
+Supports hierarchical/nested properties.
+
+Good for structured configs (like database, mail, API keys, etc.).
+
+
+Real-time Scenario:
+Imagine you want to configure an email service with properties like host, port, username, password.
+
+Code Example:
+
+// application.properties
+app.mail.host=smtp.example.com
+app.mail.port=587
+app.mail.username=test@example.com
+app.mail.password=secret
+
+// Java class
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.stereotype.Component;
+
+@Component
+@ConfigurationProperties(prefix = "app.mail")
+public class MailProperties {
+    private String host;
+    private int port;
+    private String username;
+    private String password;
+
+    // getters and setters
+}
+
+// Service using it
+import org.springframework.stereotype.Service;
+
+@Service
+public class MailService {
+    private final MailProperties mailProperties;
+
+    public MailService(MailProperties mailProperties) {
+        this.mailProperties = mailProperties;
+    }
+
+    public void printConfig() {
+        System.out.println("Host: " + mailProperties.getHost());
+        System.out.println("Port: " + mailProperties.getPort());
+    }
+}
+
+👉 When to use? If you have multiple related properties, always prefer @ConfigurationProperties.
+
+
+---
+
+🔹 2. @EnableConfigurationProperties
+
+Purpose:
+
+Tells Spring Boot to enable support for @ConfigurationProperties classes.
+
+Usually not needed if you annotate your POJO with @Component, but useful if you want to register a configuration properties class without making it a Spring bean explicitly.
+
+
+Real-time Scenario:
+You might have a library module providing a @ConfigurationProperties class, but you don’t want to annotate it with @Component.
+
+Code Example:
+
+// Java class (NO @Component here)
+@ConfigurationProperties(prefix = "app.security")
+public class SecurityProperties {
+    private String secretKey;
+    private int tokenExpiration;
+    // getters and setters
+}
+
+// Config class
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+@EnableConfigurationProperties(SecurityProperties.class)
+public class SecurityConfig {
+}
+
+👉 When to use? If you don’t want to annotate your properties class with @Component but still want it registered as a bean.
+
+
+---
+
+🔹 3. @PropertySource
+
+Purpose:
+
+Loads a custom properties file (other than application.properties or application.yml).
+
+Helpful if you want configs in separate files (db.properties, mail.properties, etc.).
+
+
+Real-time Scenario:
+You have a db.properties file inside src/main/resources.
+
+Code Example:
+
+# db.properties
+db.url=jdbc:mysql://localhost:3306/test
+db.username=root
+db.password=secret
+
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.beans.factory.annotation.Value;
+
+@Configuration
+@PropertySource("classpath:db.properties")
+public class DatabaseConfig {
+
+    @Value("${db.url}")
+    private String url;
+
+    @Value("${db.username}")
+    private String username;
+
+    @Value("${db.password}")
+    private String password;
+
+    public void printDbConfig() {
+        System.out.println("DB URL: " + url);
+        System.out.println("DB User: " + username);
+    }
+}
+
+👉 When to use? If configs are in a custom file, not in application.properties or application.yml.
+
+
+---
+
+🔹 4. @Value
+
+Purpose:
+
+Injects a single property value from application.properties (or environment/system properties).
+
+Supports SpEL (Spring Expression Language) for default values or calculations.
+
+Great for simple values, but not ideal for structured configs.
+
+
+Real-time Scenario:
+You want to quickly inject a single property like app.name.
+
+Code Example:
+
+# application.properties
+app.name=MySpringApp
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+
+@Component
+public class AppInfo {
+
+    @Value("${app.name}")
+    private String appName;
+
+    @Value("${app.version:1.0}") // default value if not defined
+    private String version;
+
+    public void printInfo() {
+        System.out.println("App: " + appName + " (v" + version + ")");
+    }
+}
+
+👉 When to use? For simple scalar values (single string, number, etc.).
+
+
+---
+
+✅ Quick Recap
+
+Annotation Purpose Best for Example Use Case
+
+@ConfigurationProperties Bind structured configs into POJO Related grouped configs Mail, DB, Security configs
+@EnableConfigurationProperties Register @ConfigurationProperties class without @Component External library configs Security, Payment gateway configs
+@PropertySource Load custom properties file Extra properties files db.properties, mail.properties
+@Value Inject single property value Simple values App name, feature flags
+
+
+
+---
+
+👉 So in real projects:
+
+Use @ConfigurationProperties for most cases (structured config).
+
+Use @Value for quick single property injection.
+
+Use @PropertySource if you need a non-standard properties file.
+
+Use @EnableConfigurationProperties if your properties class is outside Spring’s scanning or you don’t want to use @Component.

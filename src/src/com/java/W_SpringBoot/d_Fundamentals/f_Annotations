@@ -1,0 +1,126 @@
+1) Core Application Annotations:
+   * @SpringBootApplication -> Main entry point for a Spring Boot app. it combines @Configuration,
+                               @EnableAutoconfiguration and @ComponentScan.
+
+   * @Configuration -> Mark as class as a source of bean definitions; use for custom java-based config.
+
+   * @SpringBootConfiguration -> Specialized @Configuration for Spring Boot. basically it runs main class
+                                 this annotation will tell that this class is pointing to all other
+                                 beans in the project.
+
+   * @EnableAutoConfiguration -> Enables Spring Boot auto-configuration; automatically configures beans
+                                 based on classpath and properties.
+
+   * @ComponentScan -> Scans specified packages for spring components(@Component, @Service, @Repository, etc.)
+
+
+
+
+2) Stereotype/Bean Annotations:
+   * @Component -> Generic Spring bean; can be used for any class you can Spring to Manage.
+   * @Service -> Marks a service layer bean; interchangeable with component. but we use @Service for
+                 better code readability and clarity for developer.
+   * @Repository -> Marks a DAO/repository bean; provides automatic exception translation.
+   * @Controller -> Marks a Web MVC controller, handles web requests(will return views like html).
+   * @RestController -> Marks REST controller, combination of @Controller and @ResponseBody(will return views data like XML or JSON).
+   * @Bean -> Marks a method inside a @Configuration class to produce a spring-manged bean.
+
+3) Web / REST Annotations:
+
+   * @GetMapping, @PostMapping, @PutMapping, @DeleteMapping -> Maps HTTP requests to controller methods.
+   * @RequestMapping -> Maps one or more URL paths to a controller or method.
+                        Supports specifying HTTP methods (GET, POST, PUT, DELETE, etc.) via method attribute.
+                        Can specify other request attributes like headers, params, consumes, produces.
+   * @RequestParam -> Binds HTTP request parameters/query parameters to a method
+                      arguments.(refer code for more details)
+   * @PathVariable -> Binds URL Path Variables to method arguments.
+   * @RequestBody -> Binds HTTP request body(payload) to a Java Object(DTO) in order to use in method
+                     parameter.
+   * @ResponseBody -> Marks method return value to be serialized as response body.
+   * @ControllerAdvice -> Centralized Exception Handling across controllers. basically you can create
+                          a class and annotate it with @ControllerAdvice so you can use it across
+                          all controllers.
+   * @ExceptionHandler -> Handle specific exceptions inside the controller or globally with @ControllerAdvice.
+                          using this annotation either you can define global exceptions in @ControllerAdvice
+                          or you can define local exceptions in @Controller Classes.
+
+ 4) Configuration / Properties Annotations:
+
+  * @ConfigurationProperties -> Binds External properties (application.properties) to a class(As a group).
+  * @EnableConfigurationProperties -> Enable support for @ConfigurationProperties beans.
+  * @PropertySource -> Loads Custom property file.
+  * @Value -> Injects individual property values into fields (Individual Values).
+
+
+  5) Dependency Injection / Bean LifeCycle Annotations:
+    * @Autowired -> Injects Spring-managed beans (field, constructor, or setter injection).
+    * @Qualifier -> Resolves ambiguity when multiple beans of same type exists.
+    * @Primary -> Marks a bean as primary when multiple beans of the same type exists.
+    * @Lazy -> Enables lazy initialization for bean.
+    * @PostConstruct -> Runs a Method after bean initialization.
+    * @PreDestroy -> Runs a method before bean destruction.
+
+
+  6) Spring Boot Execution / Runner Interfaces/Annotations:
+     * CommandLineRunner -> interface to run logic after Application context is
+                            loaded and before Spring Boot Application is fully
+                            started. implement run(String..args)
+     * ApplicationRunner -> similar to CommandLineRunner but uses ApplicationArguments.
+     * @Order -> Specifies execution order when multiple runners exist.
+
+  7) Conditional / Auto-Configuration Control:
+     * @ConditionalOnClass -> Apply configuration only if certain class exists.
+     * @ConditionalOnMissingBean -> Apply configuration only if a bean is missing.
+     * @ConditionalOnProperty -> Apply configuration based on property value.
+     * @ConditionalOnWebApplication -> Apply configuration if it is web-context(Web application).
+     * @ConditionalOnNotWebApplication -> Apply configuration if it is non-web context.
+     * @EnableAutoConfiguration(exclude = ...) -> Exclude specific autoconfiguration classes.
+
+  8) Validation / Data Annotations:
+     ==> Basically these annotations are to validate API with jakarta validation API lib/ also
+         known as javax validation API.
+     * @NotNull -> Value should not be null.
+     * @NotEmpty -> Value should not be empty.
+     * @NotBlank -> Value should not contain spaces.
+     * @Size -> To determine the min and max of the value.
+     * @Min -> We can determine the minimum limit and the value should not be lesser than that.
+     * @Max -> We can determine the maximum limit and the value should not be lesser than that.
+     * @Constraint -> to write custom validation logic.
+     * @Valid -> to perform all the above you have to annotate DTO object with @Valid. if not
+                 they won't perform validation even though you annotate it with @NotEmpty, @NotBlank, etc.
+     * Other Validation Annotations: @Pattern, @Positive, @Digits, @DecimalMin, @DecimalMax, @Past
+                                     @Future, @AssertTrue, Refer code for more examples.
+
+  9) Bean Scoping Annotations:
+     => Bean Scope will tell Spring how to manage lifecycle and visibility of a Bean.
+     * @Scope("singleton") -> Only one instance of the bean is created in ApplicationContext.
+     * @Scope("prototype") -> A new bean instance is created each time it's required.
+     * @Scope("request") -> A new bean instance is created per HTTP request.(it is single HTTP request)
+     * @Scope("session") -> A new bean instance is created per HTTP session.(it is combination of multiple requests because a user can login and request for multiple HTTP requests for same session.)
+     * @Scope("application") -> A single bean instance is created per ServletContext.
+     * @Scope("websocket") -> A bean instance is created per WebSocket session.
+     * @RequestScope -> same as @Scope("request").
+     * @SessionScope -> same as @Scope("session").
+     * @ApplicationScope -> same as @Scope("application").
+
+  10) Spring Actuator Annotations:
+      => Basically you can check monitor your endpoints by replacing the endpoint ending with:
+         /actuator/health - shows overall health of the app.
+         /actuator/metrics - shows metrics like JVM memory, GC, HTTP request counts.
+         /actuator/info -  shows app info, version, metadata.
+         /actuator/bean - shows all spring beans.
+         /actuator/env - shows environment properties.
+         /actuator/threaddump -provides JVM thread dump.
+      But these endpoints gives you insights of overall application. if you want to monitor specific
+      business logic, you can use below annotations:
+      * @HealthIndicator(interface) -> to implement custom health checks.
+      * @Endpoint -> Define a custom Actuator endpoint.
+      * @WebEndpoint -> Define a custom endpoint exposed only via HTTP.
+      * @ReadOperation -> Mark a method as GET for custom endpoint.
+      * @WriteOperation -> Mark a method as POST/PUT for custom endpoint.
+      * @DeleteOperation -> Mark a method as DELETE for Custom endpoint.
+
+  11)  Security Annotations
+
+
+  12) Data Persistence Annotations

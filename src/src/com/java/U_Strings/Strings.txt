@@ -1,0 +1,37 @@
+String: it a sequence of characters. it is immutable - meaning it won't
+        change the original state of the object.
+
+        * Thread safe as it is immutable.
+        * String Constant pool - if two strings has same value both will point to same object in
+          string constant pool in heap memory.
+        * String is immutable because of security reasons - to achieve thread safety and also to
+          prevent malicious attacks to prevent data tampering.
+        Comparison(== will check both value and reference) ands
+        ".equals" will consider only the value of object.
+
+
+ Format Specifiers (Placeholders): A Format Specifier(placeholder) is a special symbol inside a string
+                                   that gets replaced by a value in runtime.
+
+         %s -> String
+         %d -> integer(decimal)
+         %f -> floating-point number
+         %2.f -> floating-point with 2 decimal places.
+         %c -> character
+         %b -> boolean
+
+ String Concatenation: joining two or more strings together.
+      if you do arithmetic operations on characters it will consider the ASCII value of that characters and return the final value.
+      if you give string in place of character it won't take that ASCII value it will add those two strings. refer code for more details.
+      if one of the value in expression is string, it will return the string. if you try to add two non-primitives without a String it will give error.
+
+
+String Builder: it is a mutable version of String.
+              * Not thread safe as it is mutable.
+              * it is faster than String.
+              * Best Suits for single threaded environment.
+
+String Buffer: it is a mutable version of String.
+              * Thread safe by default.
+              * it is slower than String Builder.
+              * Best Suits for multithreaded environment.

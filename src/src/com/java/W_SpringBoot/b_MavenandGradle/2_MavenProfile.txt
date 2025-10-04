@@ -1,0 +1,6 @@
+Maven Profile: it is a way to customize the build for different environments.
+               * Profiles let you define different settings like dependencies, plugins, properties.
+               * You can have multiple profiles in your pom.xml and activate one at build time.
+               * In simple words if you want different dependencies for dev,qa and prod, you can
+                 configure that in pom.xml using profile.|
+
